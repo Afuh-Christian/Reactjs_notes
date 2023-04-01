@@ -1,0 +1,18 @@
+.......UseEffect() ...........
+
+-Help us to work with react outside the react ecosystem
+-mostly consist of ... - state , props and ui
+-A tool  that allows us to synchronise react  state with those outside systems
+   -local storage, api etc   
+
+
+.......UseEffect() syntax and default behavior 
+
+----------------------------------------------------------------------------------------=
+React.useEffect()
+----------------------------------------------------------------------------------------
+has one require parameter and an optional second parameter 
+----------------------------------------------------------------------------------------
+ ----------------------------------
+
+----------------------------------------------------------------------------------------

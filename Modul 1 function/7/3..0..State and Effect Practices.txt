@@ -1,0 +1,130 @@
+
+
+import React from "react";
+
+export default function WindowTracker(){
+    return(
+        <div> 
+            <h1>Window width: {window.innerWidth}</h1>
+        </div>
+    )
+}
+
+
+
+####################
+
+
+import React, { useEffect, useState } from "react";
+import WindowTracker from "./WindowT racker";
+
+
+export default function State_effect(){
+
+    return(
+        <div>
+            <button>
+                Toggole Window Tracker
+            </button>
+            <WindowTracker/>
+        </div>
+    )
+
+}
+
+The size update only when the app  is being re-rendered(reloaded)
+
+
+######################.....with State......#######################################
+Here we just create a button set's on and of the dom element form the  <WindowTracker/>
+
+
+
+import React, { useEffect, useState } from "react";
+import WindowTracker from "./WindowT racker";
+
+
+export default function State_effect(){
+    const [show, setShow ] = useState(true)
+
+    function Toggole(){
+        setShow((prevshow) => {
+            return !prevshow
+        })
+    }
+
+    return(
+        <div>
+            <button onClick={Toggole}>
+                Toggole Window Tracker
+            </button>
+
+            {show && <WindowTracker/>}
+        </div>
+    )
+
+}
+
+
+
+-But we will have to click everytime we wish to know the new windows size 
+
+
+Let's see if we can make the size to udate automatically with something else .... 
+
+This is something out of the scope of react ... so we nee the useEffect 
+
+
+
+#####################.....with useEffect......#######################################
+
+
+import React, { useEffect, useState } from "react";
+
+export default function WindowTracker(){
+ const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+
+
+    useEffect(() => {
+        window.addEventListener("resize",function(){
+         setWindowWidth( window.innerWidth)
+       
+        })
+    },[])
+
+    return(
+        <div> 
+            <h1>Window widtlh:  {windowWidth}</h1>
+        </div>
+    )
+}
+
+
+
+...........
+
+Now the window updates the size in the state automarically
+....
+That's in the toggel btn in the parent component it on...
+
+
+....
+else it will lead to a memory leak ...
+
+...........Memory Leak .............
+
+You can't change the state of a mounted component ....
+
+
+
+
+
+
+
+
+
+
+
+
+

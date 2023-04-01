@@ -1,0 +1,159 @@
+Nb ..rememder jsx returns a regular js object
+
+we converted this list to jsx format
+##################################################
+import React from "react";
+
+export default function Map(){
+     const list = ["Chris","Tanlaka","Duke"]
+
+     function mapto(){
+        return list.map(a => <p>{a}</p>)
+     }
+     
+    return(
+        <div>
+            {mapto()}
+        </div>
+    )
+}
+
+#######################...let's work with a list of dictionaries....using props..###########################
+
+
+export const list = [
+    {name: "Afuh Christian",
+     age: 22
+    },
+
+    {name: "Tanlaka Nji",
+    age: 20
+   },
+
+   {name: "Ayangwe duke",
+   age: 19
+  }
+]
+
+######
+
+function App() {
+
+  const array = <h1>hello</h1>
+  return (
+  
+  <div>
+  <MapStudents 
+//.................................
+  list = {list}
+//.................................
+  />
+  </div>
+
+  );
+}
+export default App;
+
+######
+
+import React from "react";  
+
+export default function MapStudents({list}){
+    function mapto(){
+        return list.map(a => <><p>{a.name}</p><p>{a.age}</p></>)
+     }
+    return(
+        <div>
+            {mapto()}
+        </div>
+    )
+}
+
+#######################...Or...with props..###########################
+
+
+function App() {
+
+  const students_list = list.map(listobject => <MapStudents name={listobject.name} age={listobject.age}/>)
+ 
+  return (
+    <>
+
+    {students_list}
+ 
+    </>
+  );
+}
+
+
+export default App;
+
+
+
+
+
+MapStudents.js
+
+import React from "react";  
+
+export default function MapStudents({name,age}){
+    return(
+        <div>
+            <p>{name}</p>
+            <p>{age}</p>
+        </div>
+    )
+}
+
+#################...Or ... usint the object spread syntax (within the mapping function)...################################
+---------------------------------------------------
+  const students_list = list.map(listobject => <MapStudents {...listobject}/>)
+
+is like 
+
+  const students_list = list.map(listobject => <MapStudents name={listobject.name} age={listobject.age}/>)
+---------------------------------------------------
+
+
+
+App.js
+
+function App() {
+
+  const students_list = list.map(listobject => <MapStudents {...listobject}/>)
+ 
+  return (
+    <>
+
+    {students_list}
+ 
+    </>
+  );
+}
+
+
+export default App;
+
+
+
+
+
+MapStudents.js
+
+import React from "react";  
+
+export default function MapStudents({name,age}){
+    return(
+        <div>
+            <p>{name}</p>
+            <p>{age}</p>
+        </div>
+    )
+}
+
+##################################################################
+
+
+
+
+

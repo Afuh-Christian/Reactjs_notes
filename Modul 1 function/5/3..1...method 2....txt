@@ -1,0 +1,185 @@
+
+.....We will use the state of the parent app
+
+since we have a list of objects .... this will be abit complex
+
+
+........this is a better method than using derived states.....
+
+NB....to be able to pass a function with parameters in onclick in react
+.......Key returns something else .... you'll have to create a new props for the id alone
+
+<div onclick={() => GoIn(id)}>
+
+#############################..............Method 1....................################################
+..
+
+
+Box.js
+
+
+import React from "react";
+import { useState } from "react";
+import { boxes } from "../memesData";
+import Boxview from "./Boxview";
+import "./C.css"
+
+export default function Box(){
+ 
+    const [boxes_b, setBoxes ] = useState(boxes)
+//..................................................................
+    function ChangeColor(id){
+      setBoxes((prevboxes) => {
+         const newBoxes = []
+         for (let i = 0; i < prevboxes.length; i++) {
+           const currentBox = prevboxes[i]
+           if(currentBox.id === id){
+               const updatedBox = {
+                  ...currentBox,
+                  on:!currentBox.on
+                  
+               }
+               newBoxes.push(updatedBox)
+           }else{
+            newBoxes.push(currentBox)
+           }
+            
+         }
+
+
+         return newBoxes
+         
+      }
+
+      )}
+//..................................................................
+    const list =  boxes_b.map(box => 
+        <Boxview 
+        key={box.id} 
+        on={box.on}
+      box={box}
+//..................................................................
+      ChangeColor={ChangeColor}
+//..................................................................
+           id = {box.id}
+//..................................................................
+           />) 
+    return(
+       <div>
+         <h1>Box Challenge</h1>
+
+            {list}
+         
+           
+       </div>
+    
+    )}
+
+
+------------------------------------------
+
+
+import React from "react";
+import { useState } from "react";
+import "./C.css"
+
+export default function Boxview(props){
+
+    // const [box_b, setBox_b] = useState(props.box)
+
+    // function ChangeColor(){
+    //     setBox_b((prevbox_b) => ({
+    //         ...prevbox_b,
+    //         on: !prevbox_b.on
+    //     }))
+    // }
+
+
+
+
+    const StyleBox = {
+        backgroundColor: props.on? "blue" : "Yellow" 
+    }
+
+    return(
+//..................................................................
+            <div onClick={ () => props.ChangeColor(props.id)} style={StyleBox} className="Box">
+//..................................................................
+            </div>
+            
+    )}
+
+
+#############################..............Method 2.....map()...............################################
+
+replace this function in above 
+
+    function ChangeColor(id){
+      setBoxes((prevboxes) => {
+         return prevboxes.map((box_m) => {
+            return box_m.id === id? {...box_m,on:!box_m.on}:box_m
+         })
+      }
+       
+      )}
+
+
+
+
+############################.............small other alterations not affection method 1 or 2...............################################
+-------------------------------------------
+Box.js
+
+   const list =  boxes_b.map(box => 
+        <Boxview 
+        key={box.id} 
+        on={box.on}
+//...................passing the function an parameter as props.............................
+      ChangeColor={() => ChangeColor(box.id)}
+//.........................As we saw on the first section.......................
+          
+           />
+
+-------------------------------------------------
+
+Boxview.js
+  <div onClick={props.ChangeColor} style={StyleBox} className="Box">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+setG((prev) => {
+   return prev.map((object) => {
+        return  object.id === id? {...object, on:!object.on}:object}
+})
+})
+
+
+
+
+
+
+
+
+
+ 

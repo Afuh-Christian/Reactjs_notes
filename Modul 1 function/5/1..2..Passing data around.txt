@@ -1,0 +1,67 @@
+
+
+parent component ----data(using props)---> Child component
+
+
+
+we cannont pass  data from child to parent ...
+
+
+..But we can set a state in the parent that can be 
+-sent to any of the children (via props)
+-updated by any of the children (via props)
+
+
+
+....................Parent...........................
+App.js
+
+
+const [component, setCompenent] = useState("Component_ A")
+
+function ChangeComponent(){
+  component === "Component_ A"? setCompenent((component) => ("Component_ B")): setCompenent((component) => ("Component_ A"));
+ 
+}
+
+
+  return (
+
+  <div>
+    <h1>Passing data around ......(through 2 or more components)</h1>
+  <A component={component} ChangeComponent={ChangeComponent}/>
+  <B  component={component} ChangeComponent={ChangeComponent}/>   
+  </div>
+   </div>
+  );
+}
+
+export default App;
+
+
+......................Children...................
+A.js
+
+
+export default function A(props){
+
+    return(
+        <div>
+          <button onClick={props.ChangeComponent}>Change (A)</button>
+            <p>{props.component}</p>
+         </div>
+    )}
+
+
+B.js
+
+export default function B(props){
+    return(
+        <div>
+        <button onClick={props.ChangeComponent}>Change (B)</button>
+          <p>{props.component}</p>
+       </div>
+    )}
+
+
+

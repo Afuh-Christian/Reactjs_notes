@@ -1,0 +1,55 @@
+
+
+
+##########################################################################
+function App() {
+
+var answer
+var isCorrect = true
+answer = isCorrect? "True: I'm the Goat": "False, you aint"
+  return (
+ <p>
+    {answer}
+  </p>
+  );
+}
+
+export default App;
+
+
+##########################################################################
+
+
+to deactivate scroll ....go to in index.css
+
+###############################....other tenary methods to use in react###########################################
+
+
+function App() {
+
+var answer_value
+var isAnswer = false
+
+ return (
+ <p>
+    {isAnswer && "Wrong answer bro" || "Excellent boy"}
+  </p>
+
+ <p>
+    {isAnswer ? "Wrong answer bro" : "Excellent boy"}
+  </p>
+
+  );
+}
+
+export default App;
+
+
+##########################################################################
+
+
+
+##########################################################################
+
+
+##########################################################################

@@ -1,0 +1,36 @@
+.......Redux offers a way to fetch api's in a better way ............
+
+
+we may continue from the previous projects 
+
+
+Normally ....redux does everything synchronously , so anything happening asyncly has to happen outside the store ....
+
+
+
+This is where we nee the redux-middleware 
+the most common middleware is "REDUX THUNK" 
+
+
+######....THUNKS ( a piece of code that does some delayed work).....#######
+-Are recommended standard approach for writing async logic 
+-Just the description of thunk in the bracket above does fit async task 
+
+
+
+
+We will remove all our static state an now grabb data from an api 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+
+
+
+#####################################################################
+import './App.css';
+import Count from './Components/Counter';
+import { useState } from "react";
+
+function App() {
+
+  const [count, setCount] = useState(0)
+
+  function Add(){
+      setCount((prevcount) => (prevcount + 1))
+  }
+
+  function Subtract(){
+      setCount((prevcount) => (prevcount - 1))
+  }
+  return (
+   <div className='App'>
+     <p><button onClick={Add}>Add</button><button onClick={Subtract}>Subtract</button></p>
+  <Count count = {count}/>
+   </div>
+  );
+}
+
+export default App;
+
+###########
+import React from "react";
+import { useState } from "react";
+
+
+export default function Count(props){
+    
+ 
+    
+    return(
+        <div>
+       
+        <p>{props.count}</p>
+        </div>
+    )
+}
+
+
+#############.....changing state of child component via parent ... component....................
+
+
+
+
+
+
+#################################..changing state of parent component via child component...####################################
+
+
+import React from "react";
+import { useState } from "react";
+
+
+export default function Counter(props){
+//............Change state of parent component through child component.................
+    const [count_p, setCount] = useState(props.count_p)
+
+  function Add(){
+      setCount((prevcount) => (prevcount + 1))
+  }
+
+  function Subtract(){
+      setCount((prevcount) => (prevcount - 1))
+  }
+    return(
+        <div>
+
+        <div>
+        <p>{props.count}</p>
+        </div>
+
+
+        <div>
+        <h1>Change state of parent component through child component</h1>
+        <p><button onClick={Add}>Add</button><button onClick={Subtract}>Subtract</button></p>
+            <p>{count_p}</p>
+        </div>
+        
+        </div>
+
+
+    )
+}
+
+
+
+
+
+app.js
+
+
+import './App.css';
+import Counter from './Components/Counter';
+import { useState } from "react";
+
+function App() {
+//..............Passing state as props.....................
+  const [count, setCount] = useState(0)
+
+  function Add(){
+      setCount((prevcount) => (prevcount + 1))
+  }
+
+  function Subtract(){
+      setCount((prevcount) => (prevcount - 1))
+  }
+ //............Change state of parent component through child component.................
+
+ const count_p = 0;
+
+  return (
+   <div className='App'>
+    <div>
+   
+    <h1>Passing state as props</h1>
+     <p><button onClick={Add}>Add</button><button onClick={Subtract}>Subtract</button></p>
+  <Counter count = {count} count_p = {count_p}/>
+  </div>
+  <div>
+    <h1>Change state of parent component through child component</h1>
+
+
+  </div>
+   </div>
+  );
+}
+
+export default App;
+
+
+
+

@@ -1,0 +1,104 @@
+
+
+<textArea/>
+
+just like <input/>
+
+
+
+
+#########################################################################################
+...................Add textarea to project..................................
+
+
+import React, { useState } from "react";
+
+export default function FormObject(){
+
+    const [userObject, setUserObject ] = useState({
+        firstname:"",
+        lastname:"",
+        email:"",
+//....................................................
+        comments:""
+//....................................................
+    }) 
+//............function for forms........takes event object...containing the whole form
+    function Handlechange(event){
+        setUserObject((prevObject) => {
+         return {
+            ...prevObject,
+            [event.target.name] : event.target.value
+         }
+        })
+    }
+
+    return(
+        <div>
+            <h1>Form Object</h1>
+             <form>
+                <input
+                 type="text" 
+                placeholder="Enter firstname"
+                name= "firstname"
+                value={userObject.firstname}
+                onChange={Handlechange}
+                />
+                <input 
+                type= "text"
+                placeholder = "Enter lastname"
+                name = "lastname"
+                value={userObject.lastname}
+                onChange={Handlechange}
+                />
+                <input 
+                type= "email"
+                placeholder = "Enter email"
+                name = "email"
+                value={userObject.email}
+                onChange={Handlechange}
+                />
+//....................................................
+                <textarea
+                placeholder = "Enter comments"
+                name = "comments"
+                value={userObject.comments}
+                onChange={Handlechange}
+                />
+//....................................................
+            </form>
+
+
+            <p>{userObject.firstname}</p>
+            <p>{userObject.lastname}</p> 
+            <p>{userObject.email}</p> 
+            <p>{userObject.comments}</p> 
+
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################################
+
+simplified Handlechange
+
+
+function Handlechange(event){
+    setUserObject((prevObject) => {
+        const {name,value} = event.target
+     return {
+        ...prevObject,
+        [name] : value
+     }
+    })
+}

@@ -1,0 +1,128 @@
+........using className..............
+
+
+
+
+just copy and paste were react can run to see the output 
+
+#########################################################################################################33
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+
+/*Parent*/
+.Parent_Navbar{
+  background:linear-gradient(white,blue);
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.Navbar_pic{
+  border-radius: 50%;
+}
+
+
+
+
+
+ /*  Child*/
+    .header_nav{
+      color: blue;
+    }
+
+
+
+
+  </style>
+  
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+function Child(){
+  return(
+    <div>
+      <h1 className="header_nav">Child Componets</h1>
+     <img src="./pc.jpg" alt="" width="100px" height="100px" />
+    </div>
+  )
+}
+
+function NavBar(){
+  return(
+    <div className = "Parent_Navbar">
+      <div>
+      <img className="Navbar_pic" src="./pc.jpg" alt="" width="100px" height="100px" />
+      </div>
+      <div>
+        <h1>Parent</h1>
+      </div>
+  
+    </div>
+
+   
+  )
+}
+
+
+function Parent(){
+  return(
+    <div>
+      <h1>Parent as Container</h1>
+      <ul>
+        <li><Child/></li>
+        <li><Child/></li>
+        <li><Child/></li>
+      </ul>
+    </div>
+  )
+}
+
+
+ReactDOM.render(
+  <div>
+    <NavBar/>
+    <Parent/>
+    </div> ,
+document.getElementById("root")
+)
+
+    </script>
+  </body>
+</html>
+#########################################################################################################33
+
+
+
+
+
+#########################################################################################################33
+
+
+#########################################################################################################33
+
+
+#########################################################################################################33
+
+#########################################################################################################33
+
+#########################################################################################################33
+
+#########################################################################################################33
+
+#########################################################################################################33
+
+
+
+
+

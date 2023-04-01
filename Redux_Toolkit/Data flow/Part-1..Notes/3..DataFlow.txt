@@ -1,0 +1,286 @@
+
+
+redux is to help us create global variables that can be used by all 
+other components of the app 
+
+----------projects-----------------
+Sign up form.....
+---------------------------
+
+
+check the code ... 
+
+................................
+
+
+
+
+
+########################################################################################################3
+we could make this better by dispatching objects 
+
+It can be handled back in the slice with the 
+
+"Prepare callback"".....
+-Can generate unique ids
+-format the data
+-return the object with the payload
+
+This will simplify our component much more 
+
+-----------projects---------------------------------
+Singup_form_objects
+---------------------------
+
+nanoid ... is used to generete number id 
+
+DevTools....A way to check the behavoir of your state 
+
+
+
+
+..........Creating Users .....................
+
+...project.
+-Users
+
+1-create and configure the userSlice
+
+2-import it to the sign_up_object store.js
+
+3-make the postAdded action in the postSlice to accecpt a userId
+
+4-adjust the changes in the number of parameters to the AddPostForm.js
+
+5-getAllUsers in the AddPostForm 
+
+6-set a temporary useState for the userId
+
+
+7-we can add a boolean for the can save 
+ 
+.....To add date and time dependency ............
+this package will help use display the date and time the form was submitted .......
+npm install date-fns
+
+
+import {sub} from 'date-fns' 
+
+we will add a field to the app called date
+
+
+
+########################################################################################################3
+PostSlice.js
+
+import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from '@reduxjs/toolkit'
+//..........data & time ......................
+import {sub} from 'date-fns' 
+
+
+
+
+const initialState = [
+    {id:"1",
+    title:"Afuh Chris",
+    content:"I want pizza and rotten tomatoes ",
+    //subtracting 10 minutes from the data object created .....toISOString() = converting to a time stamp string ..............
+    date:sub(new Date(),{minutes: 10}).toISOString() 
+},
+    //......................................................................
+    {id:"2",
+    title:"Forbi steve",
+    content:"He eats alot and plays alot of video games",
+    date:sub(new Date(),{minutes: 5}).toISOString() ,
+}
+]
+
+
+const postSlice = createSlice({
+    name:"post",
+    initialState,
+    reducers:{
+    postAdd :{   
+    reducer(state,action){
+            state.push(action.payload)
+        },
+        //............add userId... making it to accept a userId......................
+        prepare(title,content,userId){
+            return {
+                payload:{
+                    id:nanoid(),
+                    title,
+                    content,
+                    // new date.......................
+                    date:new Date().toISOString(),
+                    //...............................
+                    userId,
+                    
+                
+                }
+            }
+        }
+        //.........................................................
+ 
+    }
+}
+})
+
+
+export const getAllpost = (state) => state.posts
+
+
+
+export const {postAdd} = postSlice.actions
+export default postSlice.reducer
+
+
+########################################################################################################3
+TimeAgo.js
+
+//.......................................................
+import {parseISO, formatDistanceToNow} from 'date-fns'
+//.......................................................
+
+
+import React from 'react'
+
+const TimeAgo = ({timestamp}) => {
+
+    let timeAgo = ''
+    if(timestamp){
+        //.............................................
+        const date = parseISO(timestamp)
+        const timePeriod = formatDistanceToNow(date) 
+        //.............................................
+
+        timeAgo =  `${timePeriod} ago`
+    }
+  return (
+    <span title={timestamp}>
+        &nbsp; <i>{timeAgo}</i>
+    </span>
+  )
+}
+
+export default TimeAgo
+
+
+##################################################################################################
+PostList.js
+
+
+
+import { useSelector } from 'react-redux'
+import { getAllpost } from './postSlice'
+//...................
+import TimeAgo from './TimeAgo'
+
+
+
+import React from 'react'
+import PostAuthor from './PostAuthor'
+
+const PostList = () => {
+
+
+const postslist = useSelector(getAllpost)
+
+  const postrenderList = postslist.map((item) => {
+    //........................add userId cuz it's now present...........................
+        // const {id, title, content,userId} = item
+        //...................................................
+  //  console.log(item.userId)
+   return <article>
+        <h2>{item.title}</h2>
+        <p>{item.content.substring(0,20)}</p>
+        <p>
+          <TimeAgo timestamp={item.date} />
+        </p>
+        <p>
+          <PostAuthor userId={item.userId}/>
+        </p>
+        </article>
+  })
+
+
+  return (
+    <div>
+        <h1>Posts</h1><br/>
+       <div> {postrenderList} </div>
+
+    </div>
+  )
+}
+
+export default PostList
+
+
+
+
+#####################################################################################33
+
+
+
+
+#####################################################################################33
+To make new Post appeare at the top
+
+
+
+
+import { useSelector } from 'react-redux'
+import { getAllpost } from './postSlice'
+//...................
+import TimeAgo from './TimeAgo'
+
+
+
+import React from 'react'
+import PostAuthor from './PostAuthor'
+
+const PostList = () => {
+const postslist = useSelector(getAllpost)
+//....................To make the newest item to be at the top ....................................
+const orderedPosts = PostList.slice().sort((a,b) => b.date.localeCompare(a.date))
+//Slice creates a new shalow array
+//sort compares tow items 
+//.........................................................
+
+//...........................................................
+  const postrenderList = orderedPosts.map((item) => {
+    //...........................................................
+   return <article>
+        <h2>{item.title}</h2>
+        <p>{item.content.substring(0,20)}</p>
+        <p>
+          <TimeAgo timestamp={item.date} />
+        </p>
+        <p>
+          <PostAuthor userId={item.userId}/>
+        </p>
+        </article>
+  })
+
+
+  return (
+    <div>
+        <h1>Posts</h1><br/>
+       <div> {postrenderList} </div>
+
+    </div>
+  )
+}
+
+export default PostList
+
+
+
+#####################################################################################33
+
+
+#####################################################################################33
+
+
+

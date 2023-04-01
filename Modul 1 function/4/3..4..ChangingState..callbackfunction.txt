@@ -1,0 +1,72 @@
+................
+
+We can provide a call back function as a parameter to the 
+setValue() in useSate
+
+this call back function will have to return the new value it 
+wants the state to be 
+
+this function takes in a parameter which is the oldValue of the  state
+
+setValue(function(oldValue){
+  return oldValue + 1})
+
+Using arrow functions ....
+
+setValue(oldValue => oldValue + 1)
+
+
+
+let's apply this is the add and substract we had before 
+
+#################################################################################
+
+function App() {
+
+  const [count , setCount] = useState(0)
+ 
+  function CountAdd(){
+    setCount(prevcount => prevcount + 1)
+  }
+
+  function CountMinus(){
+    setCount(function(prevcount){
+      return prevcount - 1
+    } )
+  }
+  return (
+<div>
+    <p><button onClick={CountAdd}>CountAdd</button>  <button onClick={CountMinus}>CountMinus</button></p>
+    {count}
+  </div>
+
+  );
+}
+
+export default App;
+#################################################################################
+quiz
+1. 2 options to pass in the setter funtion 
+ A. new value of state ...set(count +1)
+ B.call back function ....returns the new state
+
+2. When will u use A ..ans: when you do not care about previous value of the state
+
+3. When will u use B ...ans: when you need the previous value of state
+
+#################################################################################
+
+NB....always place images in the public folder ...... You idiot
+#################################################################################
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+.....
+
+the function in the useState array 
+
+
+...In React we can't do this 
+var value = 0
+value = 2
+
+....That's why we need the function in the useState Array to 
+handle the change 
+
+
+
+
+
+function App() {
+  const [value , setValue ]= useState("Yeah State")
+
+  function HandleChange(){
+    setValue("No Status here")
+  }
+/*  function HandleChange(){
+    if(value == "Yeah State"){
+    setValue("No Status here")
+  }else{
+    setValue("Yeah State")
+  }
+  }
+*/
+
+  return (
+  <div>
+    <p><button onClick={HandleChange} >change State</button></p>
+    {value}
+  </div>
+ 
+  );
+}
+
+export default App;
+
+
+#########################.....counter with state ..........########################
+NB....what ever change you have to do .... it must be inside the setCount() method
+
+function App() {
+
+  const [count , setCount] = useState(0)
+ 
+  function CountAdd(){
+    setCount(count + 1)
+  }
+ return (
+   
+  <div>
+    <p><button onClick={CountAdd}>CountAdd</button></p>
+    {count}
+  </div>
+   
+  
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+

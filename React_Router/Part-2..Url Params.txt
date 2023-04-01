@@ -1,0 +1,170 @@
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------1---#### Reading URL Params---------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+This will help us produce dynamic pages 
+------------------------------------------------------------------------------
+IN this example , we will display a list or products and when we click on a specific 
+product , we display a specific page
+
+-We do not want to set up a page for every product that we have (like in django)
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+ <Route path="products/:productId" element={<SingleProduct />} />
+------------------------------------------------------------------------------
+ it can also be  <Route path=":productId" element={<SingleProduct />}
+------------------------------------------------------------------------------
+<SingleProduct/> ... will be the singlepage 
+------------------------------------------------------------------------------
+productId = is the dynamic value 
+
+
+App.js
+
+
+  <BrowserRouter>
+   
+      <Routes>
+        <Route path='/' element={<SharedLayout />}>
+        <Route index element={<Home />}/>
+        <Route  path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+//.......................................................................
+        <Route path="products/:productId" element={<SingleProduct />} />
+//.......................................................................
+        <Route path='*' element={<Error />} />
+        </Route>
+
+        <Route  path="dash" element={<h1>Dash page</h1>}/> 
+      </Routes>
+    </BrowserRouter>
+
+
+
+------------------------------------------------------------------------------
+To set up the Single page ..
+impor useParams  ( a hook from react-router-dom ) 
+
+SingleProduct.js
+
+//............................................
+import { Link, useParams } from "react-router-dom";
+//............................................
+import products from "../data";
+const SingleProduct = () => {
+//............................................
+  const { productId } = useParams();
+//............................................
+
+  return (
+    <section className="section product">
+      <h2>{productId}</h2>
+      <Link to="/products">back to products</Link>
+    </section>
+  );
+};
+
+export default SingleProduct;
+
+
+When you type the dynamic value in the url ... the useParams() automatically gets 
+the value and store in the productId variable that was declared
+
+------------------------------------------------------------------------------
+
+NB the name of the dynamic value has to match what was given at the path.... just like spreading attrigutes of a object
+
+this is because useParams() is an object ... in this case with one attribute productId set from the path = :productId
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+Now let's display all the products on the Products page and make them have specific dynamic single pages 
+------------------------------------------------------------------------------
+
+
+Products.js
+
+to query all the products 
+
+import { Link } from "react-router-dom";
+import products from "../data";
+const Products = () => {
+  return (
+    <section className="section">
+      <h2>products</h2>
+      <div className="products">
+//...............................................
+        {products.map((product) => {
+          return (
+            <article key={product.id}>
+              <h5>{product.name}</h5>
+              <Link to={`/products/${product.id}`}>more info</Link>
+            </article>
+          );
+        })}
+//...............................................
+      </div>
+    </section>
+  );
+};
+
+export default Products;
+
+
+
+------------------------------------------------------------------------------
+
+SingleProduct.js
+
+Display specific item base on parameter id 
+
+import { Link, useParams } from "react-router-dom";
+import products from "../data";
+const SingleProduct = () => {
+  const { productId } = useParams();
+//....................get a single item base on urlparameter.................................................
+  const product = products.find((product) => product.id === productId);
+//.....................................................................
+  const { image, name } = product;
+
+  return (
+    <section className="section product">
+      <img src={image} alt={name} />
+      <h5>{name}</h5>
+      <Link to="/products">back to products</Link>
+    </section>
+  );
+};
+
+export default SingleProduct;
+
+
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------

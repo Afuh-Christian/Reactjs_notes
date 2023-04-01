@@ -1,0 +1,30 @@
+-it's declarative
+
+
+
+imperative method ... vinila js
+
+const h1 = document.createElement('h1')
+h1.textContent = "This is an imperative way to program" 
+h1.className = "header" 
+document.getElementById('root').append(h1)
+
+
+now the declarative method with react ...
+
+/.......the name of the function must start with capital letters ................
+function H(){
+    return(
+        <h1>This is a declarative method</h1>
+    )
+}
+ReactDOM.render(
+    <div>
+        <H/>
+    </div>
+   
+    ,document.getElementById('root')
+)
+
+
+

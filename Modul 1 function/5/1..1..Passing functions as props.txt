@@ -1,0 +1,77 @@
+
+
+
+App.js
+
+import './App.css';
+import Counter from './Components/Counter';
+import { useState } from "react";
+
+function App() {
+
+ 
+//............Change state of parent component through child component.................
+const [count_p, setCount_P] = useState(0)
+
+function Add_P(){
+  setCount_P((prevcount) => (prevcount + 1))
+}
+
+function Subtract_P(){
+  setCount_P((prevcount) => (prevcount - 1))
+}
+
+
+  return (
+   <div className='App'>
+    <div>
+   
+    <h1>Passing state as props</h1>
+     <p><button onClick={Add}>Add</button><button onClick={Subtract}>Subtract</button></p>
+ {/* //...........Passing functions as props............... */}
+  
+<Counter count = {count} Add_P={Add_P}  Subtract_P={Subtract_P}/>
+
+
+  </div>
+  <div>
+   
+      <p>{count_p}</p>
+
+  </div>
+   </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+Counter.js
+
+import React from "react";
+import { useState } from "react";
+
+
+export default function Counter(props){
+
+    return(
+        <div>
+        <div>
+        <p>{props.count}</p>
+        </div>
+        <div>
+        <h1>Change state of parent component through child component(Passing function as props)</h1>
+        <p><button onClick={props.Add_P}>Add</button><button onClick={props.Subtract_P}>Subtract</button></p>
+          
+        </div>
+
+        </div>
+
+
+    )
+}

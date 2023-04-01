@@ -1,0 +1,8 @@
+........
+
+how to use data to create our web pages(dynamic)
+
+1 props ... helps to create reusable and composable components 
+2 Creating components from an array of data
+
+     

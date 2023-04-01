@@ -1,0 +1,27 @@
+
+----------Begining react---------------- 
+
+-npm i g create-react-app
+
+
+-create-react app app-name
+
+------------icons------------------------
+
+-npm i react-icons
+
+-------------reduxs ------------------------
+..
+-npm install @reduxjs/toolkit react-redux
+
+---------------routers---------------------
+
+-npm i react-router-dom@6
+
+---------axios................
+
+-npm i axios
+
+........date counter ..................
+
+-npm i date-fns

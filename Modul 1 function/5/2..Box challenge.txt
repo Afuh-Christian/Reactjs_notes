@@ -1,0 +1,54 @@
+
+
+Box.js......
+
+
+import React from "react";
+import { useState } from "react";
+import { boxes } from "../memesData";
+import Boxview from "./Boxview";
+import "./C.css"
+
+export default function Box(){
+ 
+    const [boxes_b, setBoxes ] = useState(boxes)
+
+    const list =  boxes_b.map(box => 
+        <Boxview key={box.id} on={box.on}/>) 
+    return(
+       <div>
+         <h1>Box Challenge</h1>
+            {list}
+         
+           
+       </div>
+    
+    )}
+
+
+
+
+Boxview.js..........
+
+import React from "react";
+// import { useState } from "react";
+import "./C.css"
+
+export default function Boxview(props){
+
+    const StyleBox = {
+        backgroundColor: props.on? "blue" : "Yellow" 
+    }
+
+    return(
+      
+            <div style={StyleBox} className="Box">
+                
+            </div>
+            
+    )}
+
+
+
+
+NB....A component cannot modify props....There's a way to do this ....next lessings

@@ -1,0 +1,112 @@
+.......checkbox......
+
+-different from the others
+
+-they just hold boolean values 
+
+
+<input type="checkbox" checked=true name.., id= "check" />
+
+checked = a property which is either true or false 
+
+
+
+import React, { useState } from "react";
+
+export default function FormObject(){
+
+    const [userObject, setUserObject ] = useState({
+        firstname:"",
+        lastname:"",
+        email:"",
+        comments:"",
+        isFriendly:false
+
+
+    }) 
+// //............function for forms........takes event object...containing the whole form
+//     function Handlechange(event){
+//         setUserObject((prevObject) => {
+//          return {
+//             ...prevObject,
+//             [event.target.name] : event.target.value
+//          }
+//         })
+//     }
+
+//............function for forms........takes event object...containing the whole form
+function Handlechange(event){
+    setUserObject((prevObject) => {
+//..............................like we use to do for props ... const {a,b} = props.......................................
+        const {name,value,type,checked} = event.target
+//.....................................................................
+     return {
+        ...prevObject,
+//.....................................................................
+        [name] :   type === "checkbox"? checked : value
+//.....................................................................
+     }
+    })
+}
+
+    return(
+        <div>
+            <h1>Form Object</h1>
+             <form>
+             <span><input
+                 type="text" 
+                placeholder="Enter firstname"
+                name= "firstname"
+                value={userObject.firstname}
+                onChange={Handlechange}
+                /></span>
+                <span> <input 
+                type= "text"
+                placeholder = "Enter lastname"
+                name = "lastname"
+                value={userObject.lastname}
+                onChange={Handlechange}
+                /></span>
+                <span> <input 
+                type= "email"
+                placeholder = "Enter email"
+                name = "email"
+                value={userObject.email}
+                onChange={Handlechange}
+                /></span>
+                <span> <textarea
+                placeholder = "Enter comments"
+                name = "comments"
+                value={userObject.comments}
+                onChange={Handlechange}
+                /></span>
+
+//.....................................................................
+                <div>
+                <input
+                type="checkbox"
+                id="friendly"
+                name="isFriendly"
+                checked={userObject.isFriendly}
+                onChange={Handlechange}
+                />
+                <label htmlFor="friendly"> You are Friendly</label>
+                    </div>
+
+//.....................................................................
+            </form>
+
+
+            <p>{userObject.firstname}</p>
+            <p>{userObject.lastname}</p> 
+            <p>{userObject.email}</p> 
+            <p>{userObject.comments}</p> 
+            {userObject.isFriendly && <p>I am Friendly</p> || <p>I am Not a nice person</p>}
+
+        </div>
+    )
+}
+
+-----------------##########################
+
+NB.....Alway make the name ot the dom property same as the state

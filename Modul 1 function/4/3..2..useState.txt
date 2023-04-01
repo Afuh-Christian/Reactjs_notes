@@ -1,0 +1,73 @@
+
+########################################################
+useState is one of the many hooks in react
+
+
+useState returns [undefined,f()]
+
+
+useState("hello") returns ["hello",f()]
+
+Nb...what ever value is in the useState is the default value that
+we want to save 
+
+so 
+########################################################
+const rest = useState("Yes")
+
+output 
+
+["Yes",f()]
+
+
+to access the first item....rest[0]
+
+we are able to access it this way because useState returns an array
+########################################################
+import React from 'react';
+import { useState } from 'react';
+import './App.css';
+import Body from './Meme_Conponents/Body';
+import { data } from './memesData';
+import Header from './Meme_Conponents/Header';
+
+
+
+function App() {
+ const value = useState("Yeah State")
+  return (
+  <div>
+    {value[0]}
+  </div>
+ 
+  );
+}
+
+export default App;
+
+
+###################...destructuring the array ...#####################################
+
+
+we do this so we do not have to use indexes to access the array
+
+ const [value,func] = useState("Yeah State")
+
+
+ we have value = "Yeah State"
+
+
+
+function App() {
+ const [value,func] = useState("Yeah State")
+  return (
+  <div>
+    {value}
+  </div>
+ 
+  );
+}
+
+export default App;
+
+

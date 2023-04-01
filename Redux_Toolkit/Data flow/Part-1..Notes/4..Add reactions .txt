@@ -1,0 +1,231 @@
+In the postSlice.js ..
+
+
+
+#############################################################################################33333
+postSlice.js
+
+import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from '@reduxjs/toolkit'
+//..........data & time ......................
+import {sub} from 'date-fns' 
+
+
+
+
+const initialState = [
+    {id:"1",
+    title:"Afuh Chris",
+    content:"I want pizza and rotten tomatoes ",
+    date:sub(new Date(),{minutes: 10}).toISOString() ,
+    //......................................
+    reactions:{
+        thumbsUp:0,
+        wow:0,
+        heart:0,
+        rocket:0,
+        coffee:0
+    }
+    //......................................
+},
+
+    {id:"2",
+    title:"Forbi steve",
+    content:"He eats alot and plays alot of video games",
+    date:sub(new Date(),{minutes: 5}).toISOString() ,
+    //......................................
+    reactions:{
+        thumbsUp:0,
+        wow:0,
+        heart:0,
+        rocket:0,
+        coffee:0
+    }
+    //......................................
+}
+]
+
+
+const postSlice = createSlice({
+    name:"post",
+    initialState,
+    reducers:{
+    postAdd :{   
+    reducer(state,action){
+            state.push(action.payload)
+        },
+       
+        prepare(title,content,userId){
+            return {
+                payload:{
+                    id:nanoid(),
+                    title,
+                    content,
+                    
+                    date:new Date().toISOString(),
+                    
+                    userId,
+                    //.......................
+                    reactions:{
+                        thumbsUp:0,
+                        wow:0,
+                        heart:0,
+                        rocket:0,
+                        coffee:0
+                    }
+                    //.......................
+                    
+                    
+                
+                }
+            }
+        }
+        
+
+    },
+    //..........action to set the reactions .............
+    reactionAdded(state,action){
+        const {postId,reaction} = action.payload 
+        const existingPost = state.find(post => post.id === postId)
+        if(existingPost){
+            existingPost.reactions[reaction]++
+        }
+    }
+    //..................................................................
+}
+})
+
+
+export const getAllpost = (state) => state.posts
+
+
+//.............................................................
+export const {postAdd,reactionAdded} = postSlice.actions
+//.............................................................
+
+
+export default postSlice.reducer
+
+
+
+#############################################################################################33333
+ReactionButton.js
+
+import { useDispatch } from "react-redux";
+import { reactionAdded } from "./postSlice";
+
+
+const reactionEmoji = {
+    thumbsUp:'thumbsUp',
+    wow:'wow',
+        heart:'heart',
+        rocket:'rocket',
+        coffee:'coffee '
+}
+
+import React from 'react'
+
+const ReactionButton = ({post}) => {
+  const dispatch = useDispatch() 
+
+  //...an object lookup .....this allow us to map over an object ..............
+  const reactionButtons = Object.entries(reactionEmoji).map(([name,emoji])=> {
+    //[name,emoji] = key value pair 
+  //........................................
+    return (
+        <button
+        key={name} 
+        type="button" 
+        onClick={() => 
+        dispatch(reactionAdded({postId: post.id,reaction:name}))
+    }
+        >
+            {emoji}{post.reactions[name]}
+        </button>
+    )
+  })
+
+  
+    return (
+    <div>
+
+        {reactionButtons}
+    </div>
+  )
+}
+
+export default ReactionButton
+
+
+
+#############################################################################################33333
+PostList.js
+
+
+import { useSelector } from 'react-redux'
+import { getAllpost } from './postSlice'
+//...................
+import TimeAgo from './TimeAgo'
+
+//...................................
+import ReactionButton from './ReactionButton'
+
+
+import React from 'react'
+import PostAuthor from './PostAuthor'
+
+const PostList = () => {
+const postslist = useSelector(getAllpost)
+//....................To make the newest item to be at the top ....................................
+const orderedPosts = PostList.slice().sort((a,b) => b.date.localeCompare(a.date))
+//Slice creates a new shalow array
+//sort compares tow items 
+//.........................................................
+
+//...........................................................
+  const postrenderList = orderedPosts.map((item) => {
+    //...........................................................
+   return <article>
+        <h2>{item.title}</h2>
+        <p>{item.content.substring(0,20)}</p>
+        <p>
+          <TimeAgo timestamp={item.date} />
+        </p>
+        <p>
+          <PostAuthor userId={item.userId}/>
+        </p>
+        <p>
+          <ReactionButton post={item} />
+        </p>
+        </article>
+  })
+
+
+  return (
+    <div>
+        <h1>Posts</h1><br/>
+       <div> {postrenderList} </div>
+
+    </div>
+  )
+}
+
+export default PostList
+
+
+
+#############################################################################################33333
+
+
+
+#############################################################################################33333
+
+
+
+#############################################################################################33333
+
+
+#############################################################################################33333
+
+
+

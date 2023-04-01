@@ -1,0 +1,149 @@
+..we will be submiting a form as an object....
+---------------------------------------------------------
+so we can submit many forms at thesame time 
+with one state
+---------------------------------------------------------
+So we will be saving the state as objects instead of variables
+
+---------------------------------------------------------
+################################################################################
+
+NB...In ES6 ... there a way to make a dynamic value 
+a property of an object
+
+{
+[dynamic_value] : "hello"
+}
+
+---------------------------------------------------------
+
+   function Handlechange(event){
+        setUserObject((prevObject) => {
+
+         return {
+            ...prevObject,
+//......................................................
+            [event.target.name] : event.target.value
+//......................................................
+         }
+           
+        })
+    }
+
+---------------------------------------------------------
+###########################################..whole project..#####################################
+import React, { useState } from "react";
+
+export default function FormObject(){
+
+    const [userObject, setUserObject ] = useState({
+        firstname:"",
+        lastname:""
+    }) 
+
+    function Handlechange(event){
+        setUserObject((prevObject) => {
+         return {
+            ...prevObject,
+//......................................................
+            [event.target.name] : event.target.value
+//............................method 2 is useless..........................
+//....Or    [event.target.name === "firstname"? "firstname":"lastname"] : event.target.value
+//..............................................................................................
+
+         }
+  
+        })
+    }
+
+    return(
+        <div>
+            <h1>Form Object</h1>
+             <form>
+                <input
+                 type="text" 
+                placeholder="Enter firstname"
+                name= "firstname"
+                onChange={Handlechange}
+                />
+                <input 
+                type= "text"
+                placeholder = "Enter lastname"
+                name = "lastname"
+                onChange={Handlechange}
+                />
+            </form>
+
+
+            <p>{userObject.firstname}</p>
+            <p>{userObject.lastname}</p> 
+
+        </div>
+    )
+}
+
+
+3######################################################################################
+-----------------------...Practice..----------------------------------
+We should add the email fiel 
+
+The [event.target.name] : event.target.value..... method still works because we update attributes to attributes 
+dynamically
+
+---------------------------------------------------------
+
+import React, { useState } from "react";
+
+export default function FormObject(){
+
+    const [userObject, setUserObject ] = useState({
+        firstname:"",
+        lastname:"",
+        email:""
+    }) 
+
+    function Handlechange(event){
+        setUserObject((prevObject) => {
+         return {
+            ...prevObject,
+            [event.target.name] : event.target.value
+         }
+        })
+    }
+
+    return(
+        <div>
+            <h1>Form Object</h1>
+             <form>
+                <input
+                 type="text" 
+                placeholder="Enter firstname"
+                name= "firstname"
+                onChange={Handlechange}
+                />
+                <input 
+                type= "text"
+                placeholder = "Enter lastname"
+                name = "lastname"
+                onChange={Handlechange}
+                />
+                <input 
+                type= "email"
+                placeholder = "Enter email"
+                name = "email"
+                onChange={Handlechange}
+                />
+            </form>
+
+
+            <p>{userObject.firstname}</p>
+            <p>{userObject.lastname}</p> 
+            <p>{userObject.email}</p> 
+
+        </div>
+    )
+}
+
+---------------------------------------------------------
+
+---------------------------------------------------------

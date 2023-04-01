@@ -1,0 +1,60 @@
+.............
+
+This helps because project could contain thousands of lines of codes
+
+-File name should be thesame as the Component inside of it
+-Import React and React-dom to
+
+-NB...We need to export this component 
+
+
+
+
+eg 
+
+function Header(){
+return( <h1>Head Component</h1> )}
+
+//.................................
+export default Header 
+//.................................
+
+
+Or  
+//...........................................
+export default function Header(){
+	return( 
+		<h1>Head Component</h1>
+		 )}
+//...........................................
+
+
+
+
+Now in our main.js
+we import the Header
+
+
+import Header from "./Header.js" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

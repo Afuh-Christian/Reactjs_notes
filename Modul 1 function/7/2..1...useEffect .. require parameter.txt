@@ -1,0 +1,41 @@
+
+-----------------------------------------------------the first require parameter -----------------------------------
+-it's a call back furnction 
+React.useEffect(function(){})
+or
+React.useEffect(() => {})
+----------------------------------------------------------------------------------------
+-the funtion acts as a place to put the side effects code (eg..all the fetch code ... because it's reaching outside of react's ecosystem)
+----------------------------------------------------------------------------------------
+so now ..... 
+
+
+    useEffect(() =>{
+        fetch("https://swapi.dev/api/people/1")
+.then(res => res.json())
+// .then(data => console.log(data))
+    }
+    )
+
+Now we still have the infinit loop problem....
+
+now we need to add the second parameter  of the useEffect() to solve this 
+----------------------------------------------------------------------------------------
+so there's still no difference from what we  had before 
+----------------------------------------------------------------------------------------
+1 small difference 
+ -Anything inside the useEffect () call back function is gaurenteed to run only after 
+  the ui has been painted to the screen(callback function runs after ui has been placed on the DOM)
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+------------------------------------------------------

@@ -1,0 +1,21 @@
+In React ....
+
+values created within the functions are usally handled with 
+state 
+
+
+1..Describ state ....
+  -they way things currently are
+  -a way for react to remember saved values from within a component.
+   this is similar to declaring variables from within a component,
+    with a few addend bonuses (later)
+
+2..when to use props instead of state
+   -when passing data as parameters into a component so that 
+    it can use the data
+
+   State = -
+	   -anytime you need a component to maintain it's values
+
+3..props are immutable
+   state is mutable

@@ -1,0 +1,62 @@
+
+
+function App(){
+
+
+var [isHungry,setIsHungry] = useState(true)
+
+function Hunger(){
+  // if(typeof(isHungry) === 'undefined' || isHungry === false){
+  //   setIsHungry(function(){
+  //   return true
+  // });
+  // }
+  // else{
+  //   setIsHungry(false)
+  // }
+setIsHungry(prevState => !prevState)
+}
+
+
+return(
+
+<div>
+    <button onClick={Hunger}>hungry</button>
+    <p>{isHungry? <p>Yes I am</p> : <p>No I am not</p>}</p>
+  </div>
+
+)
+};
+
+export default App;
+
+
+
+
+#############################...list items....adding function###############################
+
+function App(){
+
+const [thingsArray, setThingsArray] = useState(["Things 1","Things 2"])
+
+
+function AddItem(){
+ var newItem = `Things ${thingsArray.length + 1}`
+ setThingsArray(prevlist =>[ ...prevlist,newItem] )...//returning an array
+}
+
+const newthingslist = thingsArray.map( v => <p key={v}>{v}</p>) 
+
+return(
+
+<div>
+<button onClick = {AddItem} > AddItem_now </button>
+
+<p>{newthingslist}</p>
+</div>
+)};
+
+
+export default App;
+
+############################################################

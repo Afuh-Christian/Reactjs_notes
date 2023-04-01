@@ -1,0 +1,97 @@
+we will follow thesame pattern 
+
+
+go to the 
+##################################################################################################################################33
+userSlice.js
+
+import { createSlice } from "@reduxjs/toolkit";
+
+//................................................................
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios"
+
+const USER_URL = 'https://jsonplaceholder.typicode.com/users'
+
+const initialState = []
+
+export const fetchUsers = createAsyncThunk('posts/fetchUsers',async () => {
+
+    try{
+        const response = await axios.get(USER_URL) 
+        return [...response.data];
+    }catch(err){
+        return err.message
+    }
+})
+
+//................................................................
+
+const userSlice = createSlice({
+    name: "user",
+    initialState,
+    reducers:{},
+//.............................Here we are looking just for one case ..................
+    extraReducers(builder){
+        builder.addCase(fetchUsers.fulfilled,(state,action) => {
+            return action.payload // replaces the user sate completely
+        })
+    }
+//..............................................................
+})
+
+
+export const getAllUsers = (state) => state.users
+
+
+export default userSlice.reducer  
+
+##################################################################################################################################33
+
+now to dispatch ., we will do this differently 
+
+################################################################################################################################################33
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import {store} from './Sign_up_Form/app/store'
+//..................this will load the users as the app loads.......................................
+import { fetchUsers } from './Users/userSlice';
+store.dispatch(fetchUsers())
+//............................................................
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>   
+    <Provider store={store}>
+    <App/>
+    </Provider>
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+
+
+
+##################################################################################################################################33
+we do this because we want the users to be loaded when the app starts 
+
+##################################################################################################################################33
+
+##################################################################################################################################33
+
+##################################################################################################################################33
+
+##################################################################################################################################33
+
+##################################################################################################################################33
+
+##################################################################################################################################33
+
+##################################################################################################################################33

@@ -1,0 +1,29 @@
+React adopts the principles of using functions or classes to 
+create user interfaces that can be reused 
+
+
+
+import React from 'react'
+import ReactDOM form 'react-dom'
+
+
+function Component(){
+	return(
+		<div>
+		<h1> Hello </h1>
+		<img src="./pic.jpg" />
+		</div>	)}
+
+ReactDOM.render(
+	<Component/>
+	,
+	document.getElementById('root') )
+
+
+
+...........QUIZ
+1.what is a react component 
+A function that returns React elements 
+Element's are the objects created when we return the JSX 
+
+

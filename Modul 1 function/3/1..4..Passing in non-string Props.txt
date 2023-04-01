@@ -1,0 +1,106 @@
+...... Remember we can include js in jsx using the {} 
+=>
+
+char,int,float,double,boolean etc
+
+ age = {22}
+ isReal ={true}
+
+
+
+App.cs
+
+// import logo from './logo.svg';
+import './App.css';
+import React from 'react';
+
+import Cat from './Components/Cat';
+import { Sum } from './Components/Cat';
+
+
+function App() {
+  return (
+    <>
+    <div className='Appcss'>
+          <Cat
+          pic = {require('./images/logo192.png')}
+          name = "React Students"
+          phone = "+237 671018950"
+          email = "afuhchristian10@gmail.com"
+          age = {30}
+          isReal ={true}
+          comments = {[{author:"Crhistian",body:"love books"}]}
+            />
+             <Cat
+          pic = {require('./images/christian.jpg')}
+          // name = "Afuh Christian Forkoum"
+          // phone = "+237 671018950"
+          email = "afuhchristian10@gmail.com"
+//...................................................................
+          age = {22}
+          isReal ={true}
+          comments = {[{author:"Crhistian",body:"love books"}]}
+//...................................................................
+            />
+      
+
+          <h1>{Sum(5,6)}</h1>
+
+    </div>
+    </>
+  );
+}
+
+
+export default App;
+
+
+
+
+#########################################################
+---------------cat.cs---------------------------------
+
+import React from "react";
+import "./Component.css"
+import logo from "../images/christian.jpg"
+
+
+
+
+export function Sum(a,b){
+    return a+b;
+}
+
+
+export default function Cat({pic,name,phone,email,age,isReal,comments}){
+    // var {pic,name,phone,email} = props
+    function check_phone(){
+        if(phone){
+        return phone;
+    }else{
+        return "No phone number";
+    }
+}
+    return(
+        <>
+        <div className="Cat">         
+             <ul className="Cat_cover">
+            <li> <img src={pic}/></li>
+            {name && <li><h3>{name}</h3></li> || <li><h3>No name</h3></li>}
+         
+           <li>{check_phone()}</li>
+           {/* <li>{phone}</li> */}
+            <li style={{display: email ? "block" : "none"}}>{email}</li>
+//.....................................................................................
+            <li>{age}</li>
+            <li>
+            {comments[0].author}</li>
+//.....................................................................................
+        </ul>
+        </div>
+
+      
+
+        </>
+    )
+}

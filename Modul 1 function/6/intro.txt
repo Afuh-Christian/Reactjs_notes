@@ -1,0 +1,16 @@
+7:48:49 React forms intro
+7:52:17 Watch for input changes in React
+7:56:49 Form inputs practice
+7:59:13 Forms state object
+8:07:18 Controlled inputs
+8:11:35 Forms in React
+8:47:04 Project: add text to image
+8:51:05 Making API Calls
+8:55:08 Intro to useEffect 
+https://reactjs.org/docs/hooks-effect...
+9:00:54 useEffect()
+9:42:46 Project:get memes from API
+9:33:00 State and Effect Practices
+9:40:05 useEffect cleanup function
+9:46:00 Using an sync function inside useEffect
+9:49:14 Section3 recap

@@ -1,0 +1,102 @@
+....NOW SETTING UP REACT ON PC..........
+
+
+
+why ... ReactDOM instead of append()
+
+
+
+#########################################################################
+
+var content =( <div><h1>Hello bro </h1><p>chris</p></div> )
+
+document.getElementById("root").append(content)
+
+............Now using append() ... returns a string representation 
+of a regular object 
+
+
+on web page.....[object Object] ...
+
+this is because it's not related to the DOM  and not recognised by the 
+browser
+
+it's only we use ReactDOM .. that react take these objects and
+renders the dom elements
+
+#############################################
+
+to fix this 
+
+var content =( <div><h1>Hello bro </h1><p>chris</p></div> )
+
+ReactDOM.render(
+ content,
+document.getElementById("root")
+)
+
+#############################################
+
+challeng ..make a static ..page with react 
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom' 
+
+content = (
+ <div> hello bro</div> )
+
+ReactDOM.render(content,document.getElementById('root')
+
+
+
+...........OR>......................
+
+
+import React from 'react'
+import ReactDOM from 'react-dom' 
+
+function App(){
+	return(
+ <div> hello bro</div> 
+)}
+ReactDOM.render(<App/>,document.getElementById('root')
+
+
+
+
+
+
+
+
+
+
+###############################
+
+route for an image in thesame director as html
+
+./pic.jpg
+
+###############################
+
+
+
+
+
+
+
+
+
+
+
+
+Nb............
+//......you can still put in brackets...........
+var content =( <div><h1>Hello bro </h1><p>chris</p></div> )
+
+
+ReactDOM.render(
+    content ,
+document.getElementById("root")
+)

@@ -1,0 +1,56 @@
+
+
+
+################################....Passing state as props .......#####################################
+import './App.css';
+import Count from './Components/Counter';
+import { useState } from "react";
+
+function App() {
+
+  const [count, setCount] = useState(0)
+
+  function Add(){
+      setCount((prevcount) => (prevcount + 1))
+  }
+
+  function Subtract(){
+      setCount((prevcount) => (prevcount - 1))
+  }
+  return (
+   <div className='App'>
+     <p><button onClick={Add}>Add</button><button onClick={Subtract}>Subtract</button></p>
+  <Count count = {count}/>
+   </div>
+  );
+}
+
+export default App;
+
+###########
+import React from "react";
+import { useState } from "react";
+
+
+export default function Count(props){
+    
+ 
+    
+    return(
+        <div>
+       
+        <p>{props.count}</p>
+        </div>
+    )
+}
+
+
+
+
+
+#####################################################################
+
+
+
+
+

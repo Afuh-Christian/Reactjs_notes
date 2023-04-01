@@ -1,0 +1,27 @@
+....React Router .... 
+
+-It's a library that enable building single page application with react
+
+
+Advantage .... 
+-Unlike a basic html website that we run to the server to reload the whole website every 
+time we need to navigate to another page .....
+  ....With React ....
+
+Since The Whole react is runing on a single index.html 
+
+React Router creates multiple pages so that you can navigate between then withou going to the server everytime 
+(this means the side reloads only when you first open the side or submit a form ) 
+
+-This make's the react app navigate very quickly like a mobile app  
+
+
+
+Begin.........
+
+npm install && npm start 
+
+
+
+install this 
+npm install react-router-dom@6

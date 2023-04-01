@@ -1,0 +1,30 @@
+1..In a vanilla js app . at what point in the form submission
+   process fo you gather all the data from the filled-out form?
+
+  ans:Right before the form is submited
+
+
+
+2. In a React app , when do you gather all the data from 
+   the filled-out form? 
+  
+  ans: As the form is being filled out . The data is all held in local state
+
+
+3.Which attribute in the from elements (value,name,onChange,etc.)
+  should match the property name being held in state from that input ?
+
+  ans:name 
+
+
+4. What's different about a saving the data from a checkbox element vs other form elements
+
+
+  ans:we need the 'value' property for the other element ... for 'checkbox' ...we need the checked property(boolean)
+
+
+5.How do you watch for a form submit? How can you trigger a from submit?
+
+ ans1 : onSumbit hanlder on the 'from' element
+ ans2 : button click (button inside the form)  
+

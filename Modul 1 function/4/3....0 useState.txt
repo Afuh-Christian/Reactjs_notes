@@ -1,0 +1,45 @@
+this is the first example of useState in react....
+
+
+
+
+import React from 'react';
+import './App.css';
+import Body from './Meme_Conponents/Body';
+import { data } from './memesData';
+import Header from './Meme_Conponents/Header';
+
+
+
+function App() {
+//..............................................................................
+ const [things , setThings] = React.useState(["thing 1","thing 2"])
+//..............................................................................
+ function addItem(){
+  const newThingText = `Thing ${things.length + 1} `
+  //..............................................................................
+  setThings(prevState => [...prevState, newThingText])
+  //..............................................................................
+ }
+
+ const thingsElements = things.map(thing =><p key={thing}>{thing}</p>)
+
+
+
+ 
+  return (
+   
+   <div>
+ 
+{/* .............................................  */}
+  <div>
+    <button onClick={addItem}>add item</button>
+    {thingsElements}
+  </div>
+  {/* .............................................  */}
+
+  
+  );
+}
+
+export default App;

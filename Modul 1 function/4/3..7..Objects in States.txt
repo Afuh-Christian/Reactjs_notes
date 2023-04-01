@@ -1,0 +1,133 @@
+
+
+
+............Complex states.................
+
+import React from "react";
+
+import { useState } from "react";   
+
+
+export default function UseStateObject(){
+ 
+    const [contact,setContact] = useState({
+        name: "Afuh Christian",
+        phone: 671018950,
+        isMale:true
+    })
+
+    return(
+        <div>
+         <p>{contact.name}</p>
+         <p>{contact.phone}</p>
+         <p>{contact.isMale? "Male" : "Female"}</p>
+        </div>
+    )
+}
+
+
+####################################################################################
+
+
+import React from "react";  
+import { useState } from "react";
+
+export default function UseStateObject(){
+    
+    const [contact , setContact] = useState({
+        name : "Afuh christian",
+        phone: 671018950,
+        age:21,
+        image_url:"",
+        isMale:true
+    })
+//...................................................................
+    function swappGender(){
+        setContact(prevcontact => {
+            return{...prevcontact, isMale:!prevcontact.isMale} 
+        })
+    }
+
+Ore
+
+    function swappGender(){
+        setContact((prevcontact) => ({...prevcontact, isMale:!prevcontact.isMale}))
+    }
+//...................................................................
+
+    var messi = "./PicturesDeveloper/paris_messi.jpg"
+    var yello = "./PicturesDeveloper/paris_yello.jpg"
+
+    
+    return(
+        <div className="object_cover">
+            <div className="object">
+                <div>
+                <p>{contact.name}</p>
+                <p>{contact.age}</p>
+                <p>{contact.phone}</p> 
+                </div>             
+            </div>
+            <img onClick={swappGender} src={contact.isMale? messi:yello}/>
+                        
+         
+        </div>
+    )
+}
+################################......memeGenerator......#########################################################
+
+
+
+import React from "react";
+import { useState } from "react";
+import { memeData } from "../memesData";
+import './component.css'
+
+export default function MemeGenerator(){
+   
+
+    const [meme , setMeme] = useState({
+        topName:"Default react",
+        bottomName: "Default react App",
+        pic_url:"./logo192.png"
+
+    })
+
+    function changeMemeDemo(){
+
+        var random = Math.floor(Math.random() * memeData.length)
+
+        setMeme((prevmeme => ({
+            ...prevmeme,
+            topName:memeData[random].topName,
+            bottomName:memeData[random].bottomName,
+            pic_url:memeData[random].pic_url
+        })))
+    }
+    return(
+        <>
+        <div className="Body">
+           <div className="forms">
+               <form>
+                   <input type="text" placeholder="Give me an emogi" value={meme.topName}/>
+                   <input type="text" placeholder="Enter something" value={meme.bottomName}/>
+               </form>
+               <button onClick={changeMemeDemo}>Get more images</button>
+           </div>
+           <div className="emogi">
+           <img src={meme.pic_url}/>
+               
+           </div>
+           <div id="Hello"></div>
+
+
+       </div>
+        </>
+       
+    )
+}
+
+
+
+
+

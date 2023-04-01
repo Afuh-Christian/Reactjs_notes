@@ -1,0 +1,19 @@
+Now from js to dom element
+
+#############################################################
+const students = ["Afuh Christian","Tanlaka","Duke"]
+
+const students_to_jsx = students.map((student) => 
+ return `<p>${student}</p>`
+)
+
+
+to make this short and simple 
+
+const students_to_dom = students.map(student=> `<p>${student}</p>`)
+
+
+output
+["<p>Afuh Christian</p>","<p>Tanlaka</p>","<p>Duke</p>"]
+
+#############################################################

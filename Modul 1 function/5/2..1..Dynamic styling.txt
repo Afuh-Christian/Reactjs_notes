@@ -1,0 +1,23 @@
+
+------------------------------------
+We can change the styling depending on the value of the state or
+of props..etc
+-------------------------------------------------
+Inline styling ........
+-unlike html that we provide a string 
+-in react ...we provide an object
+
+----------------------------------------------
+<div style = {{}} >
+
+outer braces = jsx to js 
+inner braces = js object
+-----------------------------------------------------
+it's better to create a style's object and pass to the inline style
+
+const styleObject = { } 
+
+<div style = {styleObject}>
+--------------------------------------------------------
+
+

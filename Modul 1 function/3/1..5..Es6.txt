@@ -1,0 +1,5 @@
+..........we can include Es6 in jsx within the {}
+
+eg 
+
+<img src {`../images/${props.image}`}/>

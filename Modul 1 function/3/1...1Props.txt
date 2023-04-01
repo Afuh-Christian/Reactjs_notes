@@ -1,0 +1,87 @@
+...........
+
+Props
+
+just like paremeters are passed into a function
+Props are object parameters passed into a component to make the 
+component reusable 
+
+Props can only be created in Component ....
+
+
+App.js
+// import logo from './logo.svg';
+import './App.css';
+import React from 'react';
+
+import Cat from './Components/Cat';
+import { Sum } from './Components/Cat';
+
+
+function App() {
+  return (
+    <>
+    <div className='Appcss'>
+          <Cat
+          pic = {require('./images/logo192.png')}
+          name = "React Students"
+          phone = "+237 671018950"
+          email = "afuhchristian10@gmail.com"
+            />
+             <Cat
+          pic = {require('./images/christian.jpg')}
+          name = "Afuh Christian Forkoum"
+          phone = "+237 671018950"
+          email = "afuhchristian10@gmail.com"
+            />
+      
+
+          <h1>{Sum(5,6)}</h1>
+
+    </div>
+    </>
+  );
+}
+
+
+export default App;
+
+
+
+
+Component
+
+	Cat.js
+import React from "react";
+import "./Component.css"
+import logo from "../images/christian.jpg"
+
+
+
+
+export function Sum(a,b){
+    return a+b;
+}
+
+
+export default function Cat(props){
+    return(
+        <>
+        <div className="Cat">         
+             <ul className="Cat_cover">
+            <li> <img src={props.pic}/></li>
+            <li><h3>{props.name}</h3></li>
+            <li>{props.phone}</li>
+            <li>{props.email}</li>
+        </ul>
+        </div>
+
+      
+
+        </>
+    )
+}
+
+
+
+

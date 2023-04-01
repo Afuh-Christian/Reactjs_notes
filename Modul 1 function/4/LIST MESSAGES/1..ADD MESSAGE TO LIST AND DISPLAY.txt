@@ -1,0 +1,55 @@
+
+
+
+
+
+const [firstname, setFirstname ] =useState("")
+
+const [listmessage, setListMessage] = useState(["hello","Mee to"])
+
+function Handlechange(event){
+   
+    setFirstname((prevfirstname) => {
+        const e = event.target.value 
+        return e
+    })
+
+}
+
+function Submitform(event){
+    event.preventDefault()
+    setListMessage((prevList) => {
+        if (event.name = "message"){
+        
+        return [
+            ...prevList,
+            firstname
+        ]
+    }
+    })
+}
+
+
+ const MList = listmessage.map( m =>  <p key={m}>{m}</p>)
+
+
+    return(
+        <div>
+                 <h1>Form</h1>
+            <form onSubmit={Submitform}>
+                <input 
+                type= "text"
+                placeholder="Enter value"
+                name = "message"
+                onChange={Handlechange}
+                />
+                <input type="submit" value="send"/>
+            </form>
+
+            <p>{firstname}</p>
+
+
+        <div>{MList}</div>
+
+        </div>
+    )

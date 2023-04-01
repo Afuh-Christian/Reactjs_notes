@@ -1,0 +1,236 @@
+
+#############################################################################################################33
+postSlice.js
+
+
+import { createSlice,nanoid,createAsyncThunk } from "@reduxjs/toolkit";
+import {sub} from 'date-fns' 
+import axios from "axios";
+const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
+
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts',async () => {
+
+    try{
+        const response = await axios.get(POST_URL) 
+        return [...response.data];
+    }catch(err){
+        return err.message
+    }
+})
+
+
+
+const initialState = {
+    posts:[],
+    status: 'idle', //'idle' | 'loading' | 'succeed' | 'failed'
+    error: null
+}
+
+const postSlice = createSlice({
+    name:"post",
+    initialState,
+    reducers:{
+    postAdd :{   
+    reducer(state,action){
+
+            state.posts.push(action.payload)
+
+        },
+       
+        prepare(title,content,userId){
+            return {
+                payload:{
+                    id:nanoid(),
+                    title,
+                    content,
+                    
+                    date:new Date().toISOString(),
+                    
+                    userId,
+                    
+                    reactions:{
+                        thumbsUp:0,
+                        wow:0,
+                        heart:0,
+                        rocket:0,
+                        coffee:0
+                    }
+                    
+                    
+                    
+                
+                }
+            }
+        }
+
+
+    },
+    reactionAdded(state,action){
+        const {postId,reaction} = action.payload 
+        const existingPost = state.posts.find(post => post.id === postId)       
+        if(existingPost){
+            existingPost.reactions[reaction]++
+        }
+    }
+},
+
+//..........................reducers  for the api .................................................
+extraReducers(builder){
+    builder
+        .addCase(fetchPosts.pending, (state,action) => {
+            state.status = 'loading'
+        })
+        .addCase(fetchPosts.fulfilled,(state,action) => {
+            state.status  = 'succeeded' 
+            //Adding date and reactions 
+            let min = 1 
+            const loadedPosts = action.payload.map(post => {
+                post.date = sub(new Date(),{minutes:min++}).toISOString()
+                post.reactions = {
+                    thumbsUp: 0,
+                    hooray:0,
+                    heart:0,
+                    rocket:0,
+                    eyes:0
+                }
+                return post;
+            })
+            // Add any fetched posts to the array 
+            state.posts = state.posts.concat(loadedPosts)
+        })
+        .addCase(fetchPosts.rejected,(state,action) => {
+            state.status = 'failed'
+            state.error = action.error.message
+        })
+}
+//...........................................................................
+})
+
+
+export const getAllpost = (state) => state.posts.posts
+
+//.......................................................................
+export const getPostsStatus = (state) => state.posts.status
+export const getPostsError = (state) => state.posts.error
+//.......................................................................
+
+
+
+export const {postAdd,reactionAdded} = postSlice.actions
+
+
+export default postSlice.reducer
+
+
+##############################################################################################################################################3
+PostList.js
+
+
+import { useSelector } from 'react-redux'
+import { getAllpost } from './postSlice'
+import React from 'react'
+import PostExcerpt from './PostExcerpt'
+
+//..................................................
+import { getPostsError,getPostsStatus,fetchPosts } from './postSlice'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+//..................................................
+
+
+const PostList = () => {
+
+  //..............................................
+  const dispatch = useDispatch()
+  const postStatus = useSelector(getPostsStatus)
+  const error = useSelector(getPostsError)
+  //..............................................
+
+  //..............................................
+useEffect(()=> {
+  if(postStatus === 'idle'){
+    dispatch(fetchPosts())
+  }
+},[postStatus,dispatch])
+  //..............................................
+
+
+const postslist = useSelector(getAllpost)
+
+
+  // const postrenderList = 
+
+  //.......logic to check for errors........................
+
+  let content 
+  if(postStatus === 'loading') {//...loads while fetching the api
+    content = <p>"Loading..."</p> //...You can also put in a spinner component
+  }else if(postStatus === 'succeeded'){
+    const orderedPosts = postslist.slice().sort((a,b) => b.date.localeCompare(a.date))
+    content = orderedPosts.map((post) => {
+      return <PostExcerpt key={post.id} post={post}/>
+     })
+  }else if(postStatus === 'failed'){
+    content = <p>{error}</p>
+  }
+
+  //.......................................................
+
+
+  return (
+    <div>
+        <h1>Posts</h1><br/>
+       <div> {content} </div>
+
+    </div>
+  )
+}
+
+export default PostList
+
+##############################################################################################################################################3
+PostExcerpt.js
+
+
+//.....this is for the loaing state 
+
+import React from 'react'
+import ReactionButton from './ReactionButton'
+import TimeAgo from './TimeAgo'
+import PostAuthor from './PostAuthor'
+const PostExcerpt = ({post}) => {
+  return (
+<article>
+        <h2>{post.title}</h2>
+        <p>{post.body.substring(0,20)}</p>
+        <p>
+          <TimeAgo timestamp={post.date} />
+        </p>
+        <p>
+          <PostAuthor userId={post.userId}/>
+        </p>
+        <p>
+          <ReactionButton post={post} />
+        </p>
+        </article>  )
+}
+
+export default PostExcerpt
+
+
+
+
+
+##############################################################################################################################################3
+
+##############################################################################################################################################3
+
+##############################################################################################################################################3
+
+##############################################################################################################################################3
+
+
+##############################################################################################################################################3
+
+##############################################################################################################################################3

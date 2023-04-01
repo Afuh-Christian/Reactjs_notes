@@ -1,0 +1,73 @@
+....
+
+we can change the value of props by ....
+
+
+setting a new state and initailizing with the props
+
+then altering from there 
+
+
+
+.....This method is called the DERIVED STATE METHOD...................
+
+---------------------------
+Boxview.js
+
+import React from "react";
+import { useState } from "react";
+import "./C.css"
+
+export default function Boxview(props){
+
+    const [box_b, setBox_b] = useState(props.box)
+
+    function ChangeColor(){
+        setBox_b((prevbox_b) => ({
+            ...prevbox_b,
+            on: !prevbox_b.on
+        }))
+    }
+
+    const StyleBox = {
+        backgroundColor: box_b.on? "blue" : "Yellow" 
+    }
+
+    return(
+      
+            <div onClick={ChangeColor} style={StyleBox} className="Box">
+                
+            </div>
+            
+    )}
+
+---------------------------
+Box.js
+
+import React from "react";
+import { useState } from "react";
+import { boxes } from "../memesData";
+import Boxview from "./Boxview";
+import "./C.css"
+
+export default function Box(){
+ 
+    const [boxes_b, setBoxes ] = useState(boxes)
+
+    const list =  boxes_b.map(box => 
+        <Boxview key={box.id} on={box.on} box={box}/>) 
+    return(
+       <div>
+         <h1>Box Challenge</h1>
+            {list}
+         
+           
+       </div>
+    
+    )}
+
+
+
+
+
+.......................this method is not advisable .......

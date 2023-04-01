@@ -1,0 +1,63 @@
+
+
+
+
+-request info.
+-submit into 
+
+
+1.GET the data (fetch or axios) 
+2.save the data to a state
+
+
+
+example...star wars api
+
+
+fetch("https://swapi.dev/api/people/1")
+    .then(res => res.json())
+    .then(data => console.log(data))
+
+
+#################################........part-1..........##########################################
+
+-we get data from the star wars api 
+-we create a state and save the data into the state
+
+
+import React, { useState } from "react";
+
+
+export default function Api(){
+
+    const [starWarData, setStarWarsData] = useState({})
+
+
+
+    fetch("https://swapi.dev/api/people/1")
+    .then(res => res.json())
+    .then(data => setStarWarsData(data))
+
+    return(
+        <>
+        <p>{JSON.stringify(starWarData ,null,2)}</p>
+        </>
+    )
+}
+
+
+........doing this is not enough because we get stucked in an infinite loop........
+-fetch is in the top level of component 
+   -everytime the component renders it calls fetch 
+       -fetch calls the set State function 
+          -component renders again
+               fetch is called again and so on 
+
+-So this means we need to comment out the part where we called the setStarwarsdata .... 
+ because this is the part that causes the component to be rerendered 
+
+
+###########################################################################
+
+Now we have to learn how to manage side Effects 
+

@@ -1,0 +1,32 @@
+
+
+useEffect( async ()=>{},[]) ...//we can't do this because of the cleanup funciton 
+
+1....Why we can't make the first parameter of the useEffect() (callback fucntion ) to be asyn 
+       -Async is a promise and everything in it's body will have to be a success 
+       -But this will hinder us from anding the cleanup function 
+
+--------------------------------------------------------------
+
+2....We can rather create a separate async function inside the callback function and call it within the callback function still 
+
+ NB... You not using .then with the async function 
+
+
+---------------------
+
+useEffect(() =>{
+
+    async function getPeople() {
+        const res = await fetch("https://swapi.dev/api/people/1")
+        const data = await res.json()
+        setStarWarsData(data)
+    }
+    getPeople()
+
+},[])
+
+
+we still have provition to add the cleanup function 
+
+--------------------------

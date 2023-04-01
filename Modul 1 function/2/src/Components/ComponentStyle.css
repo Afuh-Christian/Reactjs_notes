@@ -1,0 +1,74 @@
+/*......Navbar........*/
+
+.Nav{
+    height: 100px;
+    width: 100%;
+    background-color: rgb(62, 62, 87);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.logo{
+    height: 80px;
+    margin-left: 20px;
+
+}
+.Title{
+    color: white;
+    font-size: 20px;
+    margin-right: 20px;
+    letter-spacing: 2px;
+}
+
+
+
+
+
+/*......Body........*/
+.body{
+    height: 500px;
+    background: linear-gradient(white,rgb(178, 154, 178));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../logo.svg);
+    background-repeat: no-repeat;
+    background-position-x: 200px ;
+    background-position-y: -200px ;
+    /* background-color: black; */
+
+}
+.title{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.body > ul{
+    list-style: none;
+    
+}
+.body > ul >li {
+    padding-block: 10px;   
+}
+.body > ul >li::marker{
+    font-size: 2rem;
+}
+
+
+
+
+/*......Footer........*/
+
+.footer{
+    height: 100px;
+    background-color: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer > div{
+    color : black;
+}

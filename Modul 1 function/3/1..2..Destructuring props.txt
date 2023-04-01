@@ -1,0 +1,152 @@
+..........Object destructuring.............
+
+to prevent u from accessing the element using the object name all the time
+
+########################################################################
+Process 
+
+object
+Const Person = {
+   name :"Afuh",
+   email : afuh@gmail.com}
+
+destructuring
+....I have created new variables name and emails 
+const {name, email} = Person
+
+Nb.......If you wish to rename a property
+.....we change the name to full_name
+const {full_name:name, email} = Person
+
+
+now we can 
+  
+ console.log(name) == console.log(Person.name)
+
+
+#############################...method 1...###########################################
+import React from "react";
+import "./Component.css"
+import logo from "../images/christian.jpg"
+
+
+
+
+export function Sum(a,b){
+    return a+b;
+}
+
+
+export default function Cat(props){
+    var {pic,name,phone,email} = props
+    return(
+        <>
+        <div className="Cat">         
+             <ul className="Cat_cover">
+            <li> <img src={pic}/></li>
+            <li><h3>{name}</h3></li>
+            <li>{phone}</li>
+            <li>{email}</li>
+        </ul>
+        </div>
+
+      
+
+        </>
+    )
+}
+
+################################..method 2...########################################
+
+
+
+export default function Cat({pic,name,phone,email}){
+    // var {pic,name,phone,email} = props
+    return(
+        <>
+        <div className="Cat">         
+             <ul className="Cat_cover">
+            <li> <img src={pic}/></li>
+            <li><h3>{name}</h3></li>
+            <li>{phone}</li>
+            <li>{email}</li>
+        </ul>
+        </div>
+
+      
+
+        </>
+    )
+}
+
+
+############################....conditional statement within the code ...############################################
+
+{props.name && <h1> I am {props.name} </h1> }
+
+
+the above statement says:
+-If props.name = true ...render  <h1> I am {props.name} </h1> 
+
+-------------------------------we implemented 3 methods............................for phone and name....
+
+import React from "react";
+import "./Component.css"
+import logo from "../images/christian.jpg"
+
+
+
+
+export function Sum(a,b){
+    return a+b;
+}
+
+
+export default function Cat({pic,name,phone,email}){
+    // var {pic,name,phone,email} = props
+//...........................................method 3................................................
+    function check_phone(){
+        if(phone){
+        return phone;
+    }else{
+        return "No phone number";
+    }
+//...........................................method 3................................................
+}
+    return(
+        <>
+        <div className="Cat">         
+             <ul className="Cat_cover">
+            <li> <img src={pic}/></li>
+//...........................................method 1................................................
+            {name && <li><h3>{name}</h3></li> || <li><h3>No name</h3></li>}
+//...........................................method 1................................................
+         
+//...........................................method 3................................................
+           <li>{check_phone()}</li>
+//...........................................method 3................................................
+           {/* <li>{phone}</li> */}
+//...........................................method 2................................................
+            <li style={{display: email ? "block" : "none"}}>{email}</li>
+//...........................................method 2................................................
+        </ul>
+        </div>
+
+      
+
+        </>
+    )
+}
+
+
+........The best method = method 1...becuase it returns the whole jsx
+        2nd best = method 2
+        
+
+
+
+########################################################################
+
+########################################################################
+
+########################################################################

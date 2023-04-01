@@ -1,0 +1,394 @@
+----How to set up redux toolkit and get an initial proposal to 
+----------------------how it all works -------------------
+
+----------------------------------------------------------
+-Install 
+npm install @reduxjs/toolkit react-redux
+----------------------------------------------------------
+create new folder(app) and create new js file (store)
+----------------------------------------------------------
+-Redux store = container for js apps 
+	       -stores the whole state of the app in an imutable 
+	        object tree
+
+-Redux = container for js apps 
+----------------------------------------------------------
+-The intended  pattern for redux is to have a single store 
+for.....Multiple stores are posible but not recomended by redux 
+----------------------------------------------------------
+
+#######################################################################################
+app
+	store.js
+
+----------------------------------------------------------
+
+import { configureStore } from '@reduxjs/toolkit'
+
+----------------------------------------------------------
+export const store = configureStore({})
+
+the configuStore has an object as it's parameter
+----------------------------------------------------------
+export const store = configureStore({
+  reducer: {},
+})
+ the object has an attribute reduce:{} ... which takes an object too
+----------------------------------------------------------
+this reducer will be emply for now ... we'll come back an put
+in reducers that we created 
+
+----------------------------------------------------------
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+  reducer: {},
+})
+----------------------------------------------------------
+
+
+
+
+
+
+#######################################################################################
+Index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+//.......................................................
+import { store } from './app/store'
+import { Provider } from 'react-redux'
+//.......................................................
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+//....................Now the glogal state(store) will be available to the app...................................
+  <Provider store={store}>
+    <App />
+    </Provider>
+//.......................................................
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+----------------------------------------------------------
+
+----------------------------------------------------------
+For the first example 
+
+create new directory
+
+feactures
+	counter
+
+
+-this counter will have a slice 
+-SLICE 
+  Spliting up a reduxt state object into multiple slices of 
+   state
+-A slice is a collection of reducer logic and actions  for a single 
+feature in the app eg
+	-A block might have a slice for post and another for comments (they will 
+	handle the logic for each differently so each get their own slice
+----------------------------------------------------------
+
+We'll create a slice in the counter folder
+
+
+
+
+#######################################################################################
+counterSlice.js
+
+const initialState = {
+count:0
+}
+
+
+-----
+we'll import the createSlice from the redux@toolkit
+----
+
+createSlice takes an object as parameter with attributes 
+
+name :   
+initialState .... is defined from above 
+reducers:  .... an object containing actions(functions) and take as parameter initialState(can be any word but will update the initialState) 
+
+--------------------------------
+
+
+import { createSlice } from "@reduxjs/toolkit/dist/createSlice";
+
+const initialState = {
+    count: 0
+}
+
+
+export const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers:{
+        increment: (state) => {
+            state.count += 1
+        },
+        decrement: (state) => {
+            state.count -= 1
+        }
+    }
+})
+
+-----------------------------------------------
+
+now we need to export those actions 
+so we have to destructor  the actions
+
+
+for the actions 
+------------------------------------
+export const {increment,decrement} = counterSlice.actions
+------------------------------------
+
+
+we also need to export the full reducer because the store will need that
+------------------------------------
+export default counterSlice.reducer
+------------------------------------
+###########3
+
+
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+    count: 0
+}
+
+
+export const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers:{
+        increment: (state) => {
+            state.count += 1
+        },
+        decrement: (state) => {
+            state.count -= 1
+        }
+    }
+})
+
+
+export const {increment,decrement} = counterSlice.actions
+
+export default counterSlice.reducer
+
+
+
+##############################################################################3
+app
+store.js 
+
+
+Now we need to import the reducer in the store for that empty dictionary 
+-----------------
+import counterReducer from '../features/counter/counterSlice'
+----------------
+
+
+
+export const store = configureStore({
+  reducer: {
+//...........................
+    counter: counterReducer,
+//...........................
+  },
+})
+
+
+...now we could easily have other slices that we are saving to thesame store 
+
+
+------------
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from '../features/counter/counterSlice'
+
+
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+})
+
+-------------------------
+
+now that we have added the counterReducer(or counterSlice ) to the store , it's now 
+available to our app through the <Provider store={store}> in the index.js
+
+
+
+
+
+
+#################################################################################################
+
+Counter.js
+
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './counterSlice'
+
+ function Counter() {
+  const count = useSelector((state) => state.counter.count)
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+        <p> <span>{count}</span></p>
+      <div>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+       
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default Counter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############################################################################################
+
+Let's create a counter component in the counter folder and trye to apply the logic we set for it 
+
+Counter.js
+
+
+Import some hooks from reduxs
+
+useSelector 
+useDispatch
+
+-----------------------------
+import { useSelector,useDispatch } from 'react-redux/es/exports'
+-----------------------------
+
+Import the actions from the couterSlice
+--------------------------------------
+import { increment,decrement } from './counterSlice'
+--------------------------------------
+
+
+now add the state to the component ......
+-----------------------------------------------------------
+    const count = useSelector((state) => state.counter.count)
+
+
+the useSelector will referenct the state
+-----------------------------------------------------------
+
+now set the dispatch 
+--------------------------------------------------
+ const dispage = useDispatch()
+--------------------------------------------------
+The dispage will be used to call the actions in the counterSlice
+
+
+
+#############################################################################################
+
+
+Now to add more actions .... we can just do this in the counterSlice
+eg.. create a reset action to reset the number to zero
+
+...............
+
+ //............state.counter.value ..... counter is from the store.js ..................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

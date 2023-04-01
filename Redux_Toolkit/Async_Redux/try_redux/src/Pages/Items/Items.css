@@ -1,0 +1,124 @@
+
+
+
+    /* ....................body........................ */
+    body{
+        overflow-y:hidden; 
+     
+     }
+     
+     /* .........................Section1.......Items display.......... */
+     .item_parent{
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         height: 700px;
+         width: 400px;
+         overflow-y: scroll;
+     }
+     
+           /* .................Search   bar................ */
+     .create_search{
+       height: 44px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+     
+     .input_search{
+       height: 30px;
+       width: 200px;
+       border-radius: 20px;
+       border-color: rgb(223, 218, 218);
+       box-shadow: 0 8px 15px 0 rgba(119, 117, 117, 0.3);
+       /* display: flex;
+       align-items: center;
+       justify-content: center; */
+       font-size: 20px;
+       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+       
+     }
+     
+     .submit_search{
+       
+       font-size: 25px;
+       border-color: transparent;
+       background-color: transparent;
+     }
+     
+     
+     /* display items */
+     
+     
+     .item{
+         height: 280px;
+         width:190px;
+         box-shadow: 0 8px 15px 0 rgba(119, 117, 117, 0.3);
+         background: linear-gradient(white,rgb(245, 241, 243));
+         border: solid rgb(214, 212, 212) 1px;
+         padding: 17px;
+     }
+
+     img{
+         height: 140px;
+         width: 100%;
+     }
+
+
+     
+     .item_properties{
+     
+       margin: 15px;
+       line-height: 30px;
+       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+       color: rgb(55, 55, 56);
+     }
+     
+     
+     
+     
+     /* ................add_item......button below screen .......  */
+     
+     .add_item{
+       /* margin: 10px; */
+       height: 50px;
+       width: 50px;
+       border-radius: 50%;
+       background-color:rgb(201, 167, 224) ;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 40px;
+       font-weight: bold;
+       color: rgb(59, 61, 60) ;
+       position: fixed;
+       bottom:30px;
+       right:30px;
+     }
+     .add_item div {
+       color: rgb(35, 37, 36);
+       text-decoration: none;
+       transition: font-weight 0.2s;
+     }
+     .add_item div:hover {
+       font-weight: bold;
+       color:rgb(201, 167, 224);
+     }
+     
+     
+     
+     
+       /* .........update item or remove item................... */
+     .update_remove div {
+       color: rgb(35, 37, 36);
+       text-decoration: none;
+       transition: font-weight 0.2s;
+     }
+     .update_remove div:hover {
+       font-weight: bold;
+       color:rgb(201, 167, 224);
+     }
+     
+     
+     
+     
+     

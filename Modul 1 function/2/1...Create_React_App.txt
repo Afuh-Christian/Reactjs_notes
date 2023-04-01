@@ -1,0 +1,24 @@
+
+-set up a whole bundle of systems using webpack
+-teach webpack config how to use babel so it'll take the react code and convert to something readable by browsers
+-Babel and Webpack are not specific to React
+-But react needs them for most web browsers
+
+-But Babel and Webpack are difficult to use so we use "Create React App"
+
+Process.......................
+
+node -v     ... to check node version
+npm -v      ... to check npm version 
+
+install nvm(node version manager)
+
+
+npm i -g create-react-app@1.5.2
+
+create-react-app my_app
+cd my_app
+npm start
+
+
+

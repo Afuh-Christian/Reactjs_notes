@@ -1,0 +1,54 @@
+..........fetching data with useEffect .................
+
+
+
+
+import React, { useEffect, useState } from "react";
+
+
+
+export default function UseEffect_fetchApi(){
+   
+
+  const [starWarData, setStarWarsData] = useState({})
+  //    ....component - fetch - setStarWarsData - component - fetch.....   (the component runs in an infinit loop) 
+  
+  useEffect(() =>{
+      console.log("send me")
+  fetch("https://swapi.dev/api/people/1")
+  .then(res => res.json())
+  .then(data => setStarWarsData(data))
+  },[0])
+  
+  
+      return(
+          <div>
+              <h1>Api</h1>
+          <p>{JSON.stringify(starWarData ,null,2)}</p>
+  
+          <br></br>
+  
+          <p>{starWarData["name"]}</p>
+          <p>{starWarData.name}</p>
+          <p>Hello api</p>
+  
+          </div>
+      )
+
+}
+
+###################....now it renders only once 
+
+
+.....ON FIRST RENDER...............
+ - componnet renders 
+ 	-useEffect renders
+		-fetch renders 
+			-setStarWarsData renders 
+.....ON second render triggered by the setStaWarsData.....
+ - compnnet renders
+	-useEffect renders (check's if the value of the dependency array is equal to the previous value it had on the first render) 
+        -[] = [] or [2] = [2] ....it stop's render
+
+ 
+

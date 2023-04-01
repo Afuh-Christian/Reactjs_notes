@@ -1,0 +1,106 @@
+........CONTROLLED COMPONENTS .........
+
+Wehn maintaning the state of a component .... the a concept
+called "SINGLE SOUCRE OF TRUTH"
+
+-----------------------------------------------------------------------------------
+"SINGLE SOUCRE OF TRUTH"
+-the state you're maintaing in your componnent should be the single source of truth
+-
+-----------------------------------------------------------------------------------
+
+Problem 
+-we have two instances of the state that exist and they do not neccessarily match up
+-
+-----------------------------------------------------------------------------------
+
+From the last project 
+
+if we add the Value property
+The value if the input will be controlled by react and not by the input box
+-----------------------------------------------------------------------------------
+< input
+value = {object.firstname}
+/>
+-----------------------------------------------------------------------------------
+Now the state tells the input box what to display
+
+--------------------------------------------------------------
+
+####################################################################################################
+
+import React, { useState } from "react";
+
+export default function FormObject(){
+
+    const [userObject, setUserObject ] = useState({
+        firstname:"",
+        lastname:"",
+        email:""
+    }) 
+
+    function Handlechange(event){
+        setUserObject((prevObject) => {
+         return {
+            ...prevObject,
+            [event.target.name] : event.target.value
+         }
+        })
+    }
+
+    return(
+        <div>
+            <h1>Form Object</h1>
+             <form>
+                <input
+                 type="text" 
+                placeholder="Enter firstname"
+                name= "firstname"
+//...............................................
+                value={userObject.firstname}
+//...............................................
+                onChange={Handlechange}
+                />
+                <input 
+                type= "text"
+                placeholder = "Enter lastname"
+                name = "lastname"
+//...............................................
+                value={userObject.lastname}
+//...............................................
+                onChange={Handlechange}
+                />
+                <input 
+                type= "email"
+                placeholder = "Enter email"
+                name = "email"
+//...............................................
+                value={userObject.email}
+//...............................................
+                onChange={Handlechange}
+                />
+            </form>
+
+
+            <p>{userObject.firstname}</p>
+            <p>{userObject.lastname}</p> 
+            <p>{userObject.email}</p> 
+
+        </div>
+    )
+}
+
+####################################################################################################
+
+
+NB.... the handlechange function should be simplified to 
+
+function Handlechange(event){
+    setUserObject((prevObject) => {
+        const {name,value} = event.target
+     return {
+        ...prevObject,
+        [name] : value
+     }
+    })
+}

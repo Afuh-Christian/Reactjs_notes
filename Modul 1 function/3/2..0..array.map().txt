@@ -1,0 +1,36 @@
+
+
+How to use .map() to converte regular js data into jsx elements 
+that react can render 
+
+
+
+###################################################
+eg 1
+
+
+const nums = [1,2,3]
+
+const squared = nums.map(function(item){
+	return item * item
+})
+
+output
+
+squared = [1,4,9]
+
+###################################################
+eg 2
+
+const names = ["alice","bob"]
+const uppercase = names.map((name) => {
+	return name[0].toUpperCase + name.slice(1)
+})
+
+output
+
+uppercase = ["Alice","Bob"]
+
+
+
+

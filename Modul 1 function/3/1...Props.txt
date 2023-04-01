@@ -1,0 +1,58 @@
+Concept.........
+
+
+######################################################333
+how to add a include a variable in jsx
+
+const a = "hello"
+
+<div>{a}<div/>
+
+
+..........................
+
+
+import React from "react";
+
+export default function Props(){
+    const a = "Afuh Christian is 21"
+    return(
+        <>
+        <div>Hello Props</div>
+        <h1>{a}</h1>
+        </>
+    )
+}
+
+
+NB ... anything in the {} in jsx can be run as js code
+we can inclue code withing the react app built now around
+
+import React from "react";
+
+export default function Props(){
+    const a = "Afuh Christian is 21"
+    const function_date = 6+5
+    return(
+        <>
+        <div>Hello Props</div>
+        <h1>{a}</h1>
+        <h2>
+            {function_date}
+        </h2>
+        </>
+    )
+}   
+
+
+######################################################333
+
+######################################################333
+
+######################################################333
+
+######################################################333
+
+######################################################333
+
+######################################################333

@@ -1,0 +1,95 @@
+.............Let's restrict access to cirtian routes ...................
+
+
+We'll create a component page called ProtectedRoute ... where all the protection logic will be applied
+We'll also import <Navigate/> from "react-router-dom";
+
+#################################################
+
+<Route
+  path="dashboard"
+
+  element={
+//..............................
+    <ProtectedRoute user={user}>
+//..........Page we are protecting....................
+      <Dashboard user={user} />
+//..............................
+    </ProtectedRoute>
+//..............................
+  }
+/>
+#################################################
+
+ProtectedRoute.js......
+
+import { Navigate } from "react-router-dom";
+
+const ProtectedRoute = ({ 
+//..........the page that it nested ( <Dashboard/> )
+children
+//...............................
+, user }) => {
+  if (!user) {
+    return
+//..........impoted..............
+ <Navigate to="/" />;
+//..........impoted..............
+  }
+  return children;
+};
+
+export default ProtectedRoute;
+
+
+
+###############################################
+
+app.js
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+import SharedLayout from './pages/SharedLayout';
+import SingleProduct from './pages/SingleProduct';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import { useState } from 'react';
+import ProtectedRoute from './pages/ProtectedRoute';
+
+function App() {
+  const [user, setUser] = useState(null);
+  return (
+
+ 
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="products" element={<Products />} />
+        <Route path="products/:productId" element={<SingleProduct />} />
+
+        <Route path="login" element={<Login setUser={setUser} />} />
+//..............................................................................      
+  <Route
+  path="dashboard"
+  element={
+    <ProtectedRoute user={user}>
+      <Dashboard user={user} />
+    </ProtectedRoute>
+  }
+/>
+//..............................................................................      
+       
+        <Route path="*" element={<Error />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+    
+  )
+}
+
+export default App;

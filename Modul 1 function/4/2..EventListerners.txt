@@ -1,0 +1,20 @@
+
+types
+
+.addEventListener("click",function(){})
+
+
+
+ <button onClick={display()}>Get more images</button>...wrong
+
+ <button onClick={display}>Get more images</button>....correct
+
+-the first one executes when you run the code 
+-the second executes only when you click
+
+NB...if we have a list of items ... 
+ if we decide to add a function to add or remove items ... it won't work 
+unless we use useState...
+
+
+rapid updates can be archeived in react using useState

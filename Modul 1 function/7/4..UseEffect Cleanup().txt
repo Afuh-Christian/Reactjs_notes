@@ -1,0 +1,106 @@
+
+Previously .... 
+
+if we turn off the toggle window ... btn 
+...we get a memory leak
+
+
+this is because ....
+-we set up an event listerner on the window which registered it with our browser
+-so event removing the windowTracker with toggle to off .... does not auto remove the event listerner in the WindowTracker
+
+NB..When interfacing side effect with UseEffect 
+	- Any potential consequences that might happen if you do not clean up the  things you do in the side effect 
+
+-This is just one example that we are adding an event listerner that is not getting cleaned up when this Windowtracer components 
+ unmounts   
+
+-But there are other instances of this 
+	-eg Websocket connection with a chat api (
+		when we create this subscription with the 
+		chat api and you try to unmount the component
+		,it's always a good idea to sever the websocket connection   
+		as a way to clean up the effect that you have created in you're 
+		useEffect )
+
+
+.............USEEFFECT CLEANUP()..............
+
+This is a callback function that the callback function in the  useEffect will return 
+------------------------------------------------
+
+useEffect(()=>{
+//.................
+return () =>{}
+//.................
+},[])
+-----------------------------------------------
+-this function has no idea what the side effect are the u created 
+- the function body should be something to clean up the side effects
+-------------------------------------------------
+
+-------------------------------------------------------------------------
+NB...we just put a function that will reverse the effect that was made in the useEffect
+eg...addEventListener()
+
+useEffect(()=>{
+
+  function Resize(){
+   setWindowWidth(window.innerWidth)
+}
+
+  addEventListener("eventname",Resize)
+//............reverse the effect of the add event listener.........................
+return () =>{
+removeEventListener("eventname",Resize)
+}
+//.....................................
+},[])
+-------------------------------------------------------------------------
+
+
+
+###############.....#############################################
+
+
+import React, { useEffect, useState } from "react";
+
+export default function WindowTracker(){
+ const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+
+
+    useEffect(() => {
+        function Watchwidth(){
+            setWindowWidth(window.innerWidth)
+        }
+        window.addEventListener("resize",Watchwidth)
+//.....................................
+        return function(){
+            window.removeEventListener("resize",Watchwidth)
+         }
+//.....................................
+    },[])
+//.....................................
+
+    return(
+        <div> 
+            <h1>Window widtlh:  {windowWidth}</h1>
+        </div>
+    )
+}
+
+
+
+
+-----------
+
+Sow when the toggle is off (Compnent unmounted).... it now runs the return of the useEffect ....
+
+
+Normally useEffect runs after all the Dom element ....so it's usually the last thing the run 
+
+
+so when the component it unmounted ... it just runs last part of the useEffect(the return)...Where the cleanup function lies (where we reverse all the side effects we made )
+
+

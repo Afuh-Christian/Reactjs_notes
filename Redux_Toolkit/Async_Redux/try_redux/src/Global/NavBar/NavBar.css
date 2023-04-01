@@ -1,0 +1,106 @@
+/*##############################################################################################################################3*/
+
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;    
+}
+
+:root{
+    
+    --mainColorP:rgb(202, 158, 231);
+    --mainColor:rgb(202, 158, 231);
+    --mainColorLight:#5767aa;
+    --secondaryColor:#D02839;
+    --textColor:rgb(72, 70, 70);
+    --slideColor:white;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    padding:0.2rem;
+    background-color: var(--mainColor);
+    color: var(--textColor);
+}
+
+header > div {
+    margin:20px;
+    font-size: 27px;
+}
+
+nav{
+    display: flex;
+
+}
+
+nav div{ 
+    margin: 0.2rem;
+    margin-inline: 2.0rem ;
+    color: var(--textColor);
+    text-decoration: none;
+    font-size:1.5rem;
+}
+
+nav div:hover{
+    color: var(--secondaryColor);
+
+}
+
+header .nav-btn{
+    padding:5px;
+    cursor:pointer;
+    background: transparent;
+    border:none;
+    outline:none;
+    color: var(--textColor);
+    visibility: hidden; /*Button will be set vissible when in phone mode  */
+    opacity: 0;
+    font-size: 1.8rem;
+}
+
+
+@media only screen and (max-width: 1024px){
+    header .nav-btn{
+        visibility: visible;
+        opacity: 1;
+        margin: 25px;
+    }
+
+    header nav{
+        position: fixed;
+        top:0;
+        left:0;
+        height:50%;
+        width:60%;
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+        gap:1.5rem;
+        background-color: var(--slideColor);
+        transition: 1s;
+        transform: translateX(-100vh);
+        
+}
+
+header .responsive_nav{
+    transform:none;
+    -webkit-transform:none;
+    -moz-transform:none;
+    -ms-transform:none;
+    -o-transform:none;
+}
+
+nav .nav-close-btn{
+    position: absolute;
+    top:0.1rem;
+    right:0.1rem;
+    font-size: 30px;
+}
+
+nav div{
+    font-size:1.5rem;
+}
+}

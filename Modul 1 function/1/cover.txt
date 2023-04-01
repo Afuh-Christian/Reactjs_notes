@@ -1,0 +1,15 @@
+
+0:00 Introduction
+5:27 What we’ll learn
+7:03 Fun facts about react link: https://www.figma.com/file/xA1rJVQOor...
+9:08 First react
+https://reactjs.org/docs/cdn-links.html
+17:13 First React Practice 
+19:04 Local Setup (the quick way)
+21:03 Why React?
+30:38 JSX
+40:19 Goodbye, CDNs!
+44:27 Thought Experiment
+49:57 Project 1 Part 1 - MarkUp
+57:44 Pop Quiz!
+59:55 Components

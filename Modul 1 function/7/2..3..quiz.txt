@@ -1,0 +1,18 @@
+1. What is a "side effect" in React ? What are some examples? 
+  ans:Any code you wish to run that react is not in charge of 
+   expl: local storage , api , websockets, two states to keep in sync 
+
+2. What is NOT   a "side effect" in React ? Examples ? 
+ - Anything that react is in charge of 
+ -expl : maintaining state ,keeping ui in sync with data 
+
+3. When does react run your useEffect function ? When does it NOT run 
+   the effect function 
+   ans :-As the component first loads
+        -On every re-render of the component (assuming no dependencies array)
+	-will not run the effect when the values of the dependencies in the array stay the same 
+	between renders
+
+4 . Now would you explain what the "dependencies array" is ? 
+	-second parameter to the useEffect function 
+	-A way for react to know wether it should re-run the effect function 

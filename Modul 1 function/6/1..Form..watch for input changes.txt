@@ -1,0 +1,122 @@
+
+
+-------------------------------------------------------------------
+When you submit a form ... what gets passed is an event object
+-------------------------------------------------------------------
+
+<input onChange={HandleChange}/>
+-------------------------------------------------------------------
+
+When creating this function we , need to pass the event object as 
+the parameter .... 
+-------------------------------------------------------------------
+
+
+function HandleChange(event){
+
+}
+-------------------------------------------------------------------
+The event object has alot of attributes to it....
+-------------------------------------------------------------------
+
+
+event.target  = html element than triggered the event 
+-------------------------------------------------------------------
+
+event.target.value = input box value
+
+-------------------------------------------------------------------
+
+---------------------------Challenge.... update the input box on every keystrock---------------------------------------
+
+NB...we are not using onClick because the page reloads 
+
+import React, { useState } from "react";
+
+export default function Form(){
+
+    const [firstname, setFirstname ] =useState("")
+
+
+
+    function Handlechange(event){
+        setFirstname((prevfirstname) => {
+            const e = event.target.value 
+            return e
+        })
+    }
+    
+    return(
+        <div>
+          <h1>Form</h1>
+            <form>
+                <input 
+                type= "text"
+                placeholder="Enter value"
+                onClick={Handlechange}
+                />
+            </form>
+
+            <p>{firstname}</p>
+        </div>
+    )
+}
+
+
+----------------------------..Practice---------------------------------------
+
+
+
+import React, { useState } from "react";
+
+export default function Form(){
+
+    const [firstname, setFirstname ] =useState("")
+    const [lastname, setLastname ] =useState("")
+    
+
+    function Handlechange(event){
+        setFirstname((prevfirstname) => {
+            return event.target.value 
+        })
+    }
+
+    function HandlechangeLast(event){
+    setLastname((prevfirstname) => {
+        return event.target.value 
+    })
+}
+
+    return(
+        <div>
+          <h1>Form</h1>
+            <form>
+                <input 
+                type= "text"
+                placeholder="First name"
+               
+                onChange={Handlechange}
+                />
+                  <input 
+                type= "text"
+                placeholder="First name"
+               
+                onChange={HandlechangeLast}
+                />
+            </form>
+
+
+            <p>{firstname}</p>
+            <p>{lastname}</p>
+
+         
+        </div>
+    )
+}
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------

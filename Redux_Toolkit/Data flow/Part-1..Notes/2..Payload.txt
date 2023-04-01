@@ -1,0 +1,138 @@
+...............
+
+Payload are values that you can pass 
+ 
+
+let's increment by an amount that will be passend as a parameter 
+
+
+counterSlice.js
+
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+  value: 0,
+}
+
+export const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment: (state) => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.value += 1
+    },
+    decrement: (state) => {
+      state.value -= 1
+    },
+
+    resetTozero: (state) => {
+        state.value = 0
+    },
+    incrementByAmount: (state, action) => {
+        //.......action.payload need to be explicitly casted to a number ..............
+        state.value += Number(action.payload)
+      },
+  },
+})
+
+// Action creators are generated for each case reducer function
+export const { increment, decrement, resetTozero,incrementByAmount } = counterSlice.actions
+
+export default counterSlice.reducer
+
+
+###################################################################################################################################################
+
+
+...In the resulting Counter.js .... 
+
+we will create a variable and set a state for it which can be set .....
+
+Counter.js
+
+
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment, resetTozero,incrementByAmount } from './counterSlice'
+
+ function Counter() {
+    //............state.counter.value ..... counter is from the store.js ..................
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
+
+  const [incrementAmt, setIncAmt] = useState(0)
+
+  //..........to check if it's a number..................
+    const addValue = Number(incrementAmt) || 0
+
+  function Inc(event){
+    setIncAmt((prev) => {
+        const {name,value} = event.target
+        if (name === "inc")
+        return value
+    })
+  }
+
+  function reset(){
+    dispatch(resetTozero())
+    setIncAmt(0)
+  }
+
+  return (
+    <div>
+
+       
+        <input
+        name="inc"
+        onChange={Inc}
+        />
+       
+
+        {/* <input type="submit" value="amount"/> */}
+       
+        <p> <span>{count}</span></p>
+      <div>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+       
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+        <button
+          aria-label="Decrement value"
+          onClick={reset}
+        >
+          Reset
+        </button>
+
+        <button
+          aria-label="Decrement value"
+          onClick={()=>dispatch(incrementByAmount(addValue))}
+        >
+          Add by
+        </button>
+      </div>
+    </div>
+  )
+}
+
+
+export default Counter
+
+
+
+
+
+
+

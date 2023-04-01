@@ -1,0 +1,30 @@
+/*.....Cat.js...........*/
+
+.Cat{
+    width: 270px;
+    height: 360px;
+    padding: 10px 20px 40px 0;
+    box-shadow:1px 1px 14px 1px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.Cat_cover{
+    list-style: none;
+    margin-left:-20px ;
+}
+
+.Cat_cover > li > img{
+    height: 220px;
+    width:100%;
+
+}
+
+.Cat_cover > li{
+    padding-bottom:5px;
+}
+
+
+
+
+

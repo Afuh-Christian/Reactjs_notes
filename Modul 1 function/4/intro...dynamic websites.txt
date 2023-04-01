@@ -1,0 +1,20 @@
+
+Build a Meme Generator
+4:41:37 Section into and figma file
+https://scrimba.com/links/figma-meme-...
+4:45:48 Meme Generator: Header & Form
+4:57:13 Project Analysis
+4:58:20 Event Listeners
+5:04:31 Project: Get random meme
+5:10:15 Our current conundrum
+5:18:26 Props vs. State
+5:32:13 useState
+5:37:57 Changing State
+5:41:03 useState - Counter Practice
+5:45:51 useState - Changing state with a callback Function
+5:51:12 hanging State Quiz!
+5:53:44 Project: Ass images to the meme generator
+5:56:43 Challenge: Ternary Practice & flipping State back and forth
+6:06:37 Complex State
+6:27:46 Project: Refactor State
+

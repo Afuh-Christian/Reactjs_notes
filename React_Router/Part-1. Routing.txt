@@ -1,0 +1,750 @@
+.....
+ES7 + React/Redux/React-Native .... to work with react fast
+
+we need to import 3 things ....
+
+------------------------------------------------------------
+BrowserRouter = Which connects to our browser
+
+Routes = will be the parent to all the routes
+
+Route = Which will be used to set a single page 
+
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+---------------------------------1...setting up routes---------------------------
+App.js 
+
+
+//.....................
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+//.....................
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<div>home page</div>} />
+        <Route
+          path='testing'
+          element={
+            <div>
+              <h2>testing </h2>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+------------------------------------------------------------
+path = "/" ... for the home page (the current component page)....http://localhost:3000
+element = the dom element you want to represent this page (also components ) 
+------------------------------------------------------------
+path='testing'   ... for anothor page(not the home page)....http://localhost:3000/testing
+
+
+NB...YOu can also have nested 
+
+<Route>
+	<Route></Route>
+	<Route></Route>
+</Route>
+------------------------------------------------------------
+for now we will be typing the routes manually in the url
+------------------------------------------------------------
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------2---.setting up routes---------------------
+App.js 
+
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+------------------------------------------------------------
+.....
+we now have components as the elements ......... 
+
+eg  ... element = {<About />} 
+
+Nb.. these  elements are the single pages 
+     no slash needed for a path which is not the home page 
+------------------------------------------------------------
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+-------------------------------2..Navigating around ..LINKS -----------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+
+To navigate in react ....
+import the Link component ..
+
+we can still use <a href =""/> if we wish to visit an external
+site 
+------------------------------------------------------------
+import { Link } from 'react-router-dom';
+------------------------------------------------------------
+The link will lead to one of the routes you set in the App.js 
+
+------------------------------------------------------------
+
+Home.js
+
+import { Link } from 'react-router-dom';
+
+const Home = () => {
+  return (
+    <div>
+      <h2>Home Page</h2>
+//.........................................
+      <Link to='/about' className='btn'>
+        About
+      </Link>
+//.........................................
+     
+    </div>
+  );
+};
+------------------------------------------------------------
+ to='/about' .... this will lead to the path="about" ... which  .....
+                  is represented by the page(component) About 
+			
+		  "/" go to home page --> then then to "about"
+		
+....do same for the other pages ....  
+------------------------------------------------------------
+
+About.js
+
+import { Link } from 'react-router-dom';
+
+const About= () => {
+  return (
+    <div>
+      <h2>Home Page</h2>
+//...............since it's the home page..........................
+      <Link to='/' className='btn'>
+//.........................................
+        About
+      </Link>
+     {/* <div> <a href=""></div> */}
+    </div>
+  )
+}
+
+#link to the home page 
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+--------------------------4..Error page ... -------------------
+---------------
+if typed route does note exist , it will display <Error/> ( a custom component)
+
+<Route path='*' element={<Error />} />
+
+----------------------------------------
+App.js
+
+path='*'  .... all other string routes you can think of ...
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+//...............................................
+        <Route path='*' element={<Error />} />
+//...............................................
+        
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+------------------------------------------------------------
+Erro.js
+
+import { Link } from 'react-router-dom';
+
+const Error = () => {
+  return (
+    <section className='section'>
+      <section className='section'>
+      <h2>404</h2>
+      <p>page not found</p>
+      <Link to='/' className='btn'>back home</Link>
+    </section>
+    </section>
+  );
+};
+export default Error;
+
+
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------4.5 .. Nav bar (To show on all the pages ) ------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+NB .... if you wish to do any refactoring where the routes are ... it should be
+          outside the <Routes></Routes>
+ 
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+
+function App() {
+  return (
+ 
+    <BrowserRouter>
+//............................
+    <div>Nav Bar</div>
+//............................
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+      </Routes>
+//............................
+      <div>Footer</div>
+//............................
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+
+
+------------
+these are added in the app.js where the routes are .... 
+<div>Nav Bar</div> and <div>Footer</div> ...will be dispaled at 
+the top and bottom of all the pages 
+------------
+
+------------------------------------------------------------
+Create  a Navbar component and add in the place of <div>Nav Bar</div> 
+
+Navbar.js
+
+
+import { Link } from 'react-router-dom';
+const Navbar = () => {
+  return (
+    <nav className='navbar'>
+      <Link to='/'>Home</Link>
+      <Link to='/about'>About</Link>
+      <Link to='/products'>Products</Link>
+    </nav>
+  );
+};
+export default Navbar;
+
+
+
+------------------------------------------------------------
+
+App.js
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+import Navbar from './final/components/Navbar';
+
+function App() {
+  return (
+ 
+    <BrowserRouter>
+//.........................................
+    <Navbar/>
+//.........................................
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+      </Routes>
+      <div>Footer</div>
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+------------------------------------------------------------
+###########################################################################################################
+###########################################################################################################
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+-----------------------5..Nested Pages-------------------------------------
+------------------------------------------------------------
+
+
+
+  <Routes>
+
+//.........parent.............
+        <Route path='/' element={<Home />}>
+//......................
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+
+//......................
+        </Route>
+//......................
+      </Routes>
+
+
+------------------------------------------------------------
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+import Navbar from './final/components/Navbar';
+
+function App() {
+  return (
+ 
+    <BrowserRouter>
+    <Navbar/>
+      <Routes>
+        <Route path='/' element={<Home />}>
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+        </Route>
+      </Routes>
+      <div>Footer</div>
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+------------------------------------------------------------
+-Now About , Products and Error are relative to the home page 
+-Routing doesn't work anymore.. still to fix 
+
+
+Example if the parent path was home
+
+ <Route path='home' element={<Home />}>
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+        </Route>
+
+----To access 
+About ,Products, Error  = You'll have to go through the mainpage
+---
+
+this means we can create another nest beside the first nest 
+ <Route  path="dash" element={<h1>Dash page</h1>}/> 
+---------------------like in  django---------------------------------------
+     <BrowserRouter>
+    <Navbar/>
+      <Routes>
+//...................."/" will be the default displayed.....................................
+        <Route path='/' element={<Home />}>
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+        </Route>
+//.........................................................
+
+
+//....................."dash" will be displayed only in added to the url....................................
+        <Route  path="dash" element={<h1>Dash page</h1>}/> 
+//.........................................................
+      </Routes>
+      <div>Footer</div>
+    </BrowserRouter>
+
+
+the navigation to the child routes do not still work ....
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+-----------------------6..Shared Routes(to fix the child routing )-------------------------------------
+------------------------------------------------------------
+
+Go to the parent route
+-imort Outlet ..... this tag will be placed in the parent and will contain all the child routes(pages)
+-So this means we will also move the <Navbar/> to the <Home/>
+
+
+home.js
+
+import { Link, Outlet } from 'react-router-dom';
+import Navbar from '../final/components/Navbar';
+
+const Home = () => {
+  return (
+ 
+
+  <>
+//.......................
+          <Navbar/>
+//.......................
+      <section className='section'>
+//.......................     
+<Outlet/>
+//.......................
+     </section>
+    </>
+  )
+}
+
+export default Home;
+
+//.......................//.......................//.......................//.......................
+
+App.js
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+import Navbar from './final/components/Navbar';
+
+function App() {
+  return (
+ 
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />}>
+        <Route path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+        </Route>
+        <Route  path="dash" element={<h1>Dash page</h1>}/> 
+      </Routes>
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+
+
+
+
+
+for now we do not have any specific content for the home page
+(index page will solve this)
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+-------------------------7..Index Page-----------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+- Index routes render in the parent routes outlet at the parent route's path.
+- Index routes match when a parent route matches but none of the other children match.
+- Index routes are the default child route for a parent route.
+- Index routes render when the user hasn't clicked one of the items in a navigation list yet.
+
+- SharedLayout.js
+
+import { Link, Outlet } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+const SharedLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <section className='section'>
+        <Outlet />
+      </section>
+    </>
+  );
+};
+export default SharedLayout;
+------------------------------------------------------------
+
+- Home.js
+
+```js
+const Home = () => {
+  return (
+    <section className='section'>
+      <h2>Home Page</h2>
+    </section>
+  );
+};
+------------------------------------------------------------
+Now we make the SharedLayout the parent and Home the index ....
+
+this will make Home to be displayed as the default page 
+------------------------------------------------------------
+App.js
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Products from './pages/Products';
+import Error from './pages/Error';
+import SharedLayout from './pages/SharedLayout';
+
+
+function App() {
+  return (
+ 
+    <BrowserRouter>
+   
+      <Routes>
+//...............New parent....................................
+        <Route path='/' element={<SharedLayout />}>
+//....................Index...............................
+        <Route index element={<Home />}/>
+//...................................................
+        <Route  path='about' element={<About />} />
+        <Route path='products' element={<Products />} />
+        <Route path='*' element={<Error />} />
+        </Route>
+        <Route  path="dash" element={<h1>Dash page</h1>}/> 
+      </Routes>
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+-------------------------8---#### NavLink (style)--------------------------------
+------------------------------------------------------------
+
+
+Import NavLink .... for setting a defualt styling to the link (example : when it's active ) 
+
+
+"NavLink" also works link the "Link"
+
+But the advantage is that it has more styling functions in it 
+
+------------------------------------------------------------
+StyleNavbar .js
+
+
+import { NavLink } from 'react-router-dom';
+const StyleNavbar = () => {
+  return (
+    <nav className='navbar'>
+      <NavLink to='/'>Home</NavLink>
+      <NavLink to='/about'>About</NavLink>
+      <NavLink to='/products'>Products</NavLink>
+    </nav>
+  );
+};
+export default StyleNavbar;
+
+
+------------------------------------------------------------
+
+SharedLayout.js
+
+
+import { Outlet } from "react-router-dom"
+import Navbar from "../components/Navbar"
+import StyleNavbar from "../components/StyleNavbar"
+
+
+const SharedLayout = () =>{
+    return(
+        <>
+//...................
+<StyleNavbar/>
+//...................
+<section className='section'>
+<Outlet/>
+</section>
+        </>
+    )
+}
+
+export default SharedLayout
+------------------------------------------------------------
+NB..there's a default active class that applies to all links in react
+...index.js
+
+
+Now with the NavLink ,,... the react-router has provided a means 
+to add a function withing the style(interpolation) 
+
+this function will decide how the style will be 
+
+
+------------------------------------------------------------
+   <NavLink to='/' 
+     style={({isActive}) => {
+        return {
+            color:isActive? "green" : "yello"
+        }
+     }} 
+
+
+You understand
+------------------------------------------------------------
+<NavLink (style)
+
+
+import { NavLink } from 'react-router-dom';
+const StyleNavbar = () => {
+  return (
+    <nav className='navbar'>
+      <NavLink to='/' 
+     style={({isActive}) => {
+        return {
+            color:isActive? "green" : "blue"
+        }
+     }} 
+      >Home</NavLink>
+      <NavLink to='/about'
+       style={({isActive}) => {
+        return {
+            color:isActive? "green" : "blue"
+        }
+     }}
+      >About</NavLink>
+      <NavLink to='/products'
+       style={({isActive}) => {
+        return {
+            color:isActive? "green" : "blue"
+        }
+     }}
+      >Products</NavLink>
+    </nav>
+  );
+};
+export default StyleNavbar;
+
+
+
+
+------------------------------------------------------------
+NavLink (className)
+
+//..........
+  <NavLink
+    to="/"
+    className={({ isActive }) => (isActive ? "link active" : "link")}
+  >
+//..........
+
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+------------------------------------------------------------
